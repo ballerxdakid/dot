@@ -1,2 +1,5 @@
 #!/bin/bash
-exec lynx $(lasturl)
+
+select url in $(urls); do
+    lynx "$url"
+done
