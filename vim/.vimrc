@@ -201,12 +201,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   "Plug 'pangloss/vim-javascript'
   Plug 'tpope/vim-fugitive'
   Plug 'morhetz/gruvbox'
-  Plug 'frazrepo/vim-rainbow'
   call plug#end()
-
-  " rainbox
-   au FileType sh,bash,perl,go,c,python,javascript call rainbow#load()
-  "let g:rainbow_active = 1 
 
   " pandoc
   let g:pandoc#formatting#mode = 'h' " A'
