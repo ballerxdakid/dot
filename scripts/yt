@@ -10,6 +10,7 @@
 ##   newest
 
 YOUTUBE_APIKEY=$(auth get id youtubeapikey)
+YOUTUBE_TOKEN=$(auth token youtube)
 
 lastid () {
   curl -s "https://www.googleapis.com/youtube/v3/search?part=snippet&key=${YOUTUBE_APIKEY}&channelId=${YOUTUBE_CHANID}&type=video&order=date" | \
@@ -17,13 +18,39 @@ lastid () {
 }
 
 liveid () {
-  curl -s "https://www.googleapis.com/youtube/v3/search?part=snippet&key=${YOUTUBE_APIKEY}&channelId=${YOUTUBE_CHANID}&type=video&eventType=live" | \
-  jq -r '.items[0].id.videoId'
+ curl -s \
+   "https://www.googleapis.com/youtube/v3/liveBroadcasts?part=id&broadcastStatus=active&key=${YOUTUBE_APIKEY}" \
+  -H "Authorization: Bearer ${YOUTUBE_TOKEN}" \
+  -H "Accept: application/json" \
+  --compressed |
+  jq -r '.items[0].id'
 }
+
+live() {
+  echo "https://youtu.be/$(liveid)"
+}
+
+# Change the current live title without resetting the stream.
+
+title () {
+ curl -s --compressed -X PUT \
+   "https://www.googleapis.com/youtube/v3/liveBroadcasts?part=snippet&broadcastStatus=active&key=${YOUTUBE_APIKEY}" \
+  -H "Authorization: Bearer ${YOUTUBE_TOKEN}" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  --data-raw '{"id": "'$(liveid)'", "snippet": {"title": "'"$*"'"} }' \
+  | jq -r '.snippet.title'
+}
+
 
 openlast () {
     open "https://youtu.be/$(lastid)"
 }
+
+openlive () {
+    open "https://youtu.be/$(liveid)"
+}
+
 
 # Convert the YAML file at path into text suitable for a YouTube
 # description with Bookmarks/Chapters. If 'live' argument is passed will
@@ -114,8 +141,8 @@ adjustline () {
 ######################### Tab Completion Context ########################
 
 declare -a commands=(
-  commands liveid lastid openlast elapsed elapsedhr elapsedline sec2hr
-  adjustline rec2desc
+  commands liveid lastid openlast openlive elapsed elapsedhr elapsedline sec2hr
+  adjustline rec2desc title live
 )
 
 for i in ${commands[@]}; do
