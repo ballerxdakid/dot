@@ -35,6 +35,7 @@ sub get_ws_list {
 }
 
 sub image {
+    not -e "$wsdir/.config.yml" and return "";
     my $image = `yq e '.image' "$wsdir/.config.yml"`;
     chomp $image;
     return $image;
