@@ -92,6 +92,7 @@ pathappend \
   /mingw64/bin \
   /usr/local/bin \
   /usr/local/sbin \
+  /usr/local/games \
   /usr/games \
   /usr/sbin \
   /usr/bin \
