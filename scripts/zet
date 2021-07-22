@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 set -e
 
 # This zet script is a multicall executable, which means you may have
@@ -24,6 +24,7 @@ test -z "$GITUSER" && echo "GITUSER not set." && exit 1
 test -d "$HOME/.local/share/zet" && pdir="$HOME/.local/share/zet"
 test -d "$KN" && pdir="$KN"
 test -d "$ZETDIR" && pdir="$ZETDIR"
+
 
 EXE=${0##*/}
 test -z "$EXE" && echo "Could not determine name of executable." && exit 1
@@ -52,6 +53,16 @@ add() {
   git push
 }
 
+titles() {
+  local -a zets=($(find "$pdir/$EXE" -maxdepth 2 -type d -path '*/20*' ))
+
+  local IFS=$'\n'
+  for i in ${zets[@]}; do
+    [[ -r "$i/README.md" ]] || continue
+    echo "${i##*/}" $(head -1 "$i/README.md")
+  done
+}
+
 query() {
   test -z "$1" && echo "Missing search query." && exit 1
   type urlencode >/dev/null 2>&1
@@ -64,6 +75,7 @@ query() {
 
 case "$1" in
 add | "") add ;;
+titles) titles ;;
 q | query)
   shift
   query "$@"
