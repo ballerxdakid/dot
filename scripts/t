@@ -52,9 +52,9 @@ else
   w
   pomo start
 fi
-echo "$topic" >"$HOME/.tmux-live-right" &
-twitch title "$topic" &
-yt title "$topic" &>/dev/null &
-twitter update "📺 $topic #livestream #status #update $(yt live)" &
-gh live "$topic" &
-f "${topic}" &
+echo "$topic" >"$HOME/.tmux-live-right"
+twitch title "$topic" 
+yt title "$topic" &>/dev/null
+twitter update "📺 $topic #livestream #status #update $(yt live)"
+gh live "$topic"
+f "${topic}" 
