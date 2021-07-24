@@ -25,7 +25,6 @@ test -d "$HOME/.local/share/zet" && pdir="$HOME/.local/share/zet"
 test -d "$KN" && pdir="$KN"
 test -d "$ZETDIR" && pdir="$ZETDIR"
 
-
 EXE=${0##*/}
 test -z "$EXE" && echo "Could not determine name of executable." && exit 1
 
@@ -54,13 +53,25 @@ add() {
 }
 
 titles() {
-  local -a zets=($(find "$pdir/$EXE" -maxdepth 2 -type d -path '*/20*' ))
+  local -a zets=($(find "$pdir/$EXE" -maxdepth 2 -type d -path '*/20*'|sort ))
 
   local IFS=$'\n'
   for i in ${zets[@]}; do
     [[ -r "$i/README.md" ]] || continue
     echo "${i##*/}" $(head -1 "$i/README.md")
   done
+}
+
+_last() {
+  local line=$(titles | tail -1)
+  echo "* [${line##*\# }](https://github.com/rwxrob/zet/tree/main/${line%% *})"
+}
+
+totxt() {
+  local zet="$1"
+  dir="$pdir/$EXE/$zet"
+  [[ -r $dir/README.md ]] || return
+  txt < $dir/README.md
 }
 
 query() {
@@ -76,6 +87,8 @@ query() {
 case "$1" in
 add | "") add ;;
 titles) titles ;;
+totxt) shift; totxt "$@";;
+last) shift; _last "$@";;
 q | query)
   shift
   query "$@"
