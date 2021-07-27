@@ -131,7 +131,7 @@ shopt -s histappend
 
 # --------------------------- smart prompt ---------------------------
 
-PROMPT_LONG=50
+PROMPT_LONG=20
 PROMPT_MAX=95
 
 __ps1() {
