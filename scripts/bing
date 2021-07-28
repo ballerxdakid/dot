@@ -1,3 +1,5 @@
 #!/bin/sh
-exec lynx "www.bing.com/search?q=$*"
+url="https://www.bing.com/search?q=$(urlencode "$*")"
+chat "$url"
+exec lynx "www.bing.com/search?q=$url"
 
