@@ -282,6 +282,7 @@ newcmd() {
 owncomp=(
   pdf md yt gl kn auth pomo config 
   sshkey ws ./build build b ./setup
+  iam
 )
 
 for i in ${owncomp[@]}; do complete -C $i $i; done

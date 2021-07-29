@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # Updates YouTube and Twitch Titles, sets the GitHub profile status, and
 # sends a tweet pointing to the YouTube video.
@@ -29,7 +28,6 @@ short="${topic%%#*}"
 if [[ ${#short} > 80 ]]; then
   fatal 'Topic must be under 80 characters'
 fi
-zetid="[$(isosec)]"
 
 TWITCH_TOKEN=$(auth token twitch)
 TWITCH_CLIENTID=$(auth get id twitch)
@@ -41,20 +39,19 @@ set_twitter_status() {
   if [[ $topic =~ ^\[ ]]; then
     return
   fi
-  twitter update "📺 ${topic} ${zetid} #livestream https://youtu.be/${YOUTUBE_VIDEO}?t=$(vidoffsetsec)"
+  twitter update "📺 ${topic} #livestream https://youtu.be/${YOUTUBE_VIDEO}?t=$(vidoffsetsec)"
 }
 #set_twitter_status
 if test "$topic" = default; then
   topic="$(head -1 $HOME/.banner)"
-  pomo stop
 else
   echo "$topic" >>"$HOME/.topics"
   w
-  pomo start
 fi
 echo "$topic" >"$HOME/.tmux-live-right"
 twitch title "$topic" 
-yt title "$topic" &>/dev/null
-twitter update "📺 $topic #livestream #status #update $(yt live)"
-gh live "$topic"
-f "${topic}" 
+chat "$topic"
+yt title live "$topic" &>/dev/null
+sleep 5
+twitter update "📺 $topic #livestream #status #update $(yt live)" &>/dev/null
+gh live "$topic" &>/dev/null

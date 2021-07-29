@@ -1,0 +1,61 @@
+#!/usr/bin/bash
+
+x_usage() {
+    local cmds="${COMMANDS[@]}"
+    printf "usage: ${0##*/} (${cmds// /|})\n"
+}
+
+x_away() {
+    message="$*"
+    [[ -z "$message" ]] && message=$(now)
+    away="Away: $message"
+    t "$away" 2>/dev/null
+    pomo stop
+    exec tmux -L live resize-pane -Z &
+    fishies 
+}
+
+x_quiet() {
+    message="$*"
+    [[ -z "$message" ]] && read -r message -p "Message: "
+    t "Quiet: $message" 2>/dev/null
+}
+
+x_talking() {
+    message="$*"
+    [[ -z "$message" ]] && read -r message -p "Message: "
+    t "Talking: $message" 2>/dev/null
+}
+
+x_live() {
+    message="$*"
+    [[ -z "$message" ]] && read -r message -p "Message: "
+    t "Live: $message" 2>/dev/null
+}
+
+# --------------------- completion and delegation --------------------
+
+declare -a COMMANDS=()
+
+while read -r line; do
+    [[ $line =~ ^declare\ -f\ x_ ]] || continue
+    COMMANDS+=( ${line##declare -f x_} )
+done < <(declare -F)
+
+if [[ -n $COMP_LINE ]]; then
+    line=${COMP_LINE#* }
+    for c in "${COMMANDS[@]}"; do
+        [[ ${c:0:${#line}} == "${line,,}" ]] && echo "$c"
+    done
+    exit
+fi
+
+declare cmd="$1"; shift
+for c in "${COMMANDS[@]}"; do
+    if [[ $c == "$cmd" ]]; then
+        "x_$cmd" "$@"
+        exit $?
+    fi
+done
+
+x_usage "$@"

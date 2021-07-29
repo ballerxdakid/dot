@@ -28,11 +28,7 @@ title() {
   if test "${1%% *}" = default; then
     title="$TITLE"
   else
-    if test ${1:0:1} = '['; then
-      title="$*"
-    else
-      title="$* [$(isosec)]"
-    fi
+    title="$*"
   fi
   resp=$(curl -sS -X PATCH "https://api.twitch.tv/helix/channels?broadcaster_id=$USERID" \
     -H "Authorization: Bearer $TOKEN" \
