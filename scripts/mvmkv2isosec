@@ -8,10 +8,12 @@ set -e
 # the timezone/offset in the time stamp, maybe I'll add it someday). 
 
 convert() {
-    local sec=${1//[-_]/}
+    local path=${1%/*}
+    local sec=${1##*/}
+    local sec=${sec//[-_]/}
     local newname="$(date +%Y%m%d%H%M%S -u -d "$(isosec2plain "$sec") $(date +%z)").mkv"
-    echo  "$1 -> $newname"
-    mv "$1" "$newname" || true
+    echo  "$1 -> $path/$newname"
+    mv "$1" "$path/$newname" || true
     return 0
 }
 
