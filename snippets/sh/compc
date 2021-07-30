@@ -1,17 +1,32 @@
 #!/usr/bin/bash
 
-# This snippet contains the scaffolding for Bash tab completion using
-# the complete -C foo foo variation which allows scripts to complete
-# themselves (rather than having another script somewhere to manage). To
-# use it simply add a function with the additional command and add the
-# name of it to the commands array declaration at the top of the script.
-# Then add complete -C foo foo (or something like it) to your bashrc.
-# Begin functions with x_ to allow useful command names to be used that
-# would otherwise conflict with existing system and bash keywords.
+declare -A help
+
+help[main]='
+This snippet contains the scaffolding for Bash tab completion using
+the complete -C foo foo variation which allows scripts to complete
+themselves (rather than having another script somewhere to manage). To
+use it simply add a function with the additional command and add the
+name of it to the commands array declaration at the top of the script.
+Then add complete -C foo foo (or something like it) to your bashrc.
+Begin functions with x_ to allow useful command names to be used that
+would otherwise conflict with existing system and bash keywords.
+'
 
 x_usage() {
     local cmds="${COMMANDS[@]}"
-    printf "usage: ${0##*/} (${cmds// /|})\n"
+    printf "usage: %s (%s)\n" "${0##*/}" "${cmds// /|}"
+}
+
+x_help() { 
+  local name=${1:-main} 
+  local file="/tmp/$name-help.html"
+  if [[ -n "$HELP_BROWSER" ]];then
+    _make_html "$name"
+    exec "$HELP_BROWSER" "$file"
+  else
+    pandoc -s -t plain  <<< "${help[${1:-main}]}" | more
+  fi
 }
 
 x_foo() {
@@ -22,9 +37,15 @@ x_foo_bar() {
     echo would foo bar
 }
 
-# --------------------- completion and delegation --------------------
+_make_html() {
+  local name=${1:-main}
+  local title="$EXE $name"
+  [[ $name = main ]] && title="$EXE"
+  pandoc -s --metadata title="$title" \
+    -o "/tmp/$name-help.html" <<< "${help[$name]}"
+}
 
-declare -a COMMANDS=()
+# --------------------- completion and delegation --------------------
 
 while read -r line; do
     [[ $line =~ ^declare\ -f\ x_ ]] || continue
