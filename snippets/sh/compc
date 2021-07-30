@@ -73,10 +73,18 @@ if [[ -n $COMP_LINE ]]; then
     exit
 fi
 
-declare cmd="$1"; shift
+EXE="${0##*/}"
 for c in "${COMMANDS[@]}"; do
-    if [[ $c == "$cmd" ]]; then
-        "x_$cmd" "$@"
+    if [[ $c == "$EXE" ]]; then
+        "x_$EXE" "$@"
+        exit $?
+    fi
+done
+
+CMD="$1"; shift
+for c in "${COMMANDS[@]}"; do
+    if [[ $c == "$CMD" ]]; then
+        "x_$CMD" "$@"
         exit $?
     fi
 done
