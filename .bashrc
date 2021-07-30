@@ -11,6 +11,7 @@ export GITUSER="$USER"
 export DOTFILES="$HOME/repos/github.com/$GITUSER/dot"
 export SNIPPETS="$HOME/repos/github.com/$GITUSER/dot/snippets"
 export GHREPOS="$HOME/repos/github.com/$GITUSER/"
+export HELP_BROWSER=lynx
 
 export TERM=xterm-256color
 export HRULEWIDTH=73
@@ -280,9 +281,8 @@ newcmd() {
 # ------------- source external dependencies / completion ------------
 
 owncomp=(
-  pdf md yt gl kn auth pomo config 
+  pdf md zet yt gl kn auth pomo config iam
   sshkey ws ./build build b ./setup
-  iam
 )
 
 for i in ${owncomp[@]}; do complete -C $i $i; done

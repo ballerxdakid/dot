@@ -199,7 +199,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'rwxrob/vim-pandoc-syntax-simple'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   "Plug 'pangloss/vim-javascript'
-  Plug 'tpope/vim-fugitive'
+  "Plug 'tpope/vim-fugitive'
   Plug 'morhetz/gruvbox'
   call plug#end()
 
@@ -272,6 +272,7 @@ fun! s:Perltidy()
   call setpos('.', l:pos)
 endfun
 "autocmd FileType perl autocmd BufWritePre <buffer> call s:Perltidy()
+"
 
 " force some files to be specific file type
 au bufnewfile,bufRead $SNIPPETS/md/* set ft=pandoc
@@ -294,12 +295,13 @@ au bufnewfile,bufRead *gitconfig set filetype=gitconfig
 au bufnewfile,bufRead /tmp/psql.edit.* set syntax=sql
 au bufnewfile,bufRead doc.go set spell
 
-" fun! s:DetectGo()
-"     if getline(1) == 'package main'
-"         set ft=go
-"     endif
-" endfun
-" autocmd BufNewFile,BufRead * call s:DetectGo()
+" fix bork bash detection
+fun! s:DetectBash()
+    if getline(1) == '#!/usr/bin/bash'
+        set ft=bash
+    endif
+endfun
+autocmd BufNewFile,BufRead * call s:DetectBash()
 
 " displays all the syntax rules for current position, useful
 " when writing vimscript syntax plugins
