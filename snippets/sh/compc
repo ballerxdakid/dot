@@ -18,6 +18,10 @@ x_usage() {
     printf "usage: %s (%s)\n" "${0##*/}" "${cmds// /|}"
 }
 
+help[help]='
+The `help` command prints help information for this script or the
+specific command (first argument).'
+
 x_help() { 
   local name=${1:-main} 
   local file="/tmp/$name-help.html"
