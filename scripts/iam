@@ -8,7 +8,7 @@ x_usage() {
 x_away() {
     message="$*"
     [[ -z "$message" ]] && message=$(now)
-    away="Away: $message"
+    away="[away] $message"
     t "$away" 2>/dev/null
     pomo stop
     exec tmux -L live resize-pane -Z &
@@ -18,19 +18,25 @@ x_away() {
 x_quiet() {
     message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "Quiet: $message" 2>/dev/null
+    t "[quiet] $message" 2>/dev/null
 }
 
 x_talking() {
     message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "Talking: $message" 2>/dev/null
+    t "[talking] $message" 2>/dev/null
 }
 
 x_live() {
     message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "Live: $message" 2>/dev/null
+    t "[live] $message" 2>/dev/null
+}
+
+x_recording() {
+    message="$*"
+    [[ -z "$message" ]] && read -r message -p "Message: "
+    t "[recording] $message" 2>/dev/null
 }
 
 # --------------------- completion and delegation --------------------
