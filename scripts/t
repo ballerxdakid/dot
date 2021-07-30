@@ -53,5 +53,5 @@ twitch title "$topic"
 chat "$topic"
 yt title live "$topic" &>/dev/null
 sleep 2
-twitter update "📺 $topic #livestream #status #update $(yt live)" &>/dev/null
+twitter update "$topic #livestream #status #update $(yt live)" &>/dev/null
 gh live "$topic" &>/dev/null

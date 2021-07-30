@@ -9,7 +9,7 @@ x_away() {
     _filter "$@"
     local message="$*"
     [[ -z "$message" ]] && message=$(now)
-    away="[away] $message"
+    away="🐟 $message"
     t "$away" 2>/dev/null
     pomo stop
     exec tmux -L live resize-pane -Z &
@@ -20,28 +20,28 @@ x_quiet() {
     _filter "$@"
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "[quiet] $message" 2>/dev/null
+    t "🔇 $message" 2>/dev/null
 }
 
 x_talking() {
     _filter "$@"
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "[talking] $message" 2>/dev/null
+    t "☕ $message" 2>/dev/null
 }
 
 x_live() {
     _filter "$@"
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "[live] $message" 2>/dev/null
+    t "🔴 $message" 2>/dev/null
 }
 
 x_recording() {
     _filter "$@"
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "[recording] $message" 2>/dev/null
+    t "🎬 $message" 2>/dev/null
 }
 
 x_mklinks() {
