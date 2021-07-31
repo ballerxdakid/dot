@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+exec mpv --fs --start=00:19 --fs-screen=1 "$CUTSCENES/its-working.mkv" > /dev/null

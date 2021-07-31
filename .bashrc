@@ -12,6 +12,7 @@ export DOTFILES="$HOME/repos/github.com/$GITUSER/dot"
 export SNIPPETS="$HOME/repos/github.com/$GITUSER/dot/snippets"
 export GHREPOS="$HOME/repos/github.com/$GITUSER/"
 export HELP_BROWSER=lynx
+export CUTSCENES="$HOME/Videos/cutscenes"
 
 export TERM=xterm-256color
 export HRULEWIDTH=73
@@ -132,7 +133,7 @@ shopt -s histappend
 
 # --------------------------- smart prompt ---------------------------
 
-PROMPT_LONG=20
+PROMPT_LONG=70
 PROMPT_MAX=95
 
 __ps1() {

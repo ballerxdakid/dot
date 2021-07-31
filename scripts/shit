@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-exec mpv --fs --fs-screen=1 $YOUTUBE_RECORDINGS/../../software-shit.mkv
+exec mpv --fs --fs-screen=1 "$CUTSCENES/software-shit.mkv" &>/dev/null

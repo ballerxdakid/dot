@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+exec mpv --fs --start=00:09 --fs-screen=1 "$CUTSCENES/thisguy.mp4" &>/dev/null
