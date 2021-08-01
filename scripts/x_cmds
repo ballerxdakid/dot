@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+while IFS= read -r line; do
+  [[ $line =~ ^x_[_a-zA-Z0-9]* ]] && echo "${BASH_REMATCH[0]}"
+done
