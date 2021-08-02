@@ -48,15 +48,23 @@ is written in CommonMark (Markdown) and will displayed as Web page if
 sent to `$PAGER` (default: more).'
 
 x_help() { 
-  local name=${1:-main} 
+  local name="$1"
+  if [[ -z "$name" ]];then
+    for c in "${COMMANDS[@]}";do
+      x_help "$c" buildonly
+    done
+    x_help main
+    return 0
+  fi
   local title="$EXE $name"
-  local file="/tmp/$name-help.html"
+  [[ $name = main ]] && title="$EXE"
+  local file="/tmp/help-$EXE-$name.html"
   if _have pandoc ; then
     if _have "$HELP_BROWSER" ;then
-      [[ $name = main ]] && title="$EXE"
       pandoc -s --metadata title="$title" \
-        -o "/tmp/$name-help.html" <<< "${help[$name]}"
-      exec "$HELP_BROWSER" "$file"
+        -o "$file" <<< "${help[$name]}"
+      [[ -z "$2" ]] && cd /tmp && exec "$HELP_BROWSER" "$file"
+      return 0
     fi
     pandoc -s --metadata title="$title" \
       -t plain <<< "${help[$name]}" | "$PAGER"
