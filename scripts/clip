@@ -9,7 +9,7 @@ set -e
 : ${CLIP_DATA:="$HOME/.config/clip/data"}
 : ${CLIP_DIR:="$HOME/Videos/clips"}
 : ${CLIP_SCREEN:=1}
-: ${CLIP_VOLUME:=0}
+: ${CLIP_VOLUME:=-50}
 : ${PAGER:=more}
 : ${EDITOR:=vi}
 : ${HELP_BROWSER:=}
@@ -41,7 +41,7 @@ Environment variables:
 : ${CLIP_DATA:="$HOME/.config/clip/data"}
 : ${CLIP_DIR:="$HOME/Videos/clips"}
 : ${CLIP_SCREEN:=1}
-: ${CLIP_VOLUME:=0}
+: ${CLIP_VOLUME:=-50}
 : ${PAGER:=more}
 : ${EDITOR:=vi}
 : ${HELP_BROWSER:=}
