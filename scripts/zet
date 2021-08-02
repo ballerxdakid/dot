@@ -293,10 +293,12 @@ pushes.'
 help[a]='The `a` command is a short form of `add`.'
 
 x_add() {
+  local title="$*"
   local dir readme
   dir="$(x_d)/$(x_isosec)"
   readme="$dir/README.md"
   mkdir -p "$dir"
+  printf "# %s\n\n" $title > "$readme"
   "${EDITOR:-vim}" "$readme"
   cd "$dir"
   [[ -s "$dir/README.md" ]] || return 1
@@ -349,8 +351,11 @@ x_last() {
   local last
   mapfile titles < <(x_titles)
   last=${#titles[@]}
-  echo "${titles[$last-1]%% *}"
-  #echo "* [${line#* }](https://github.com/$GITUSER/zet/tree/main/${line%% *})"
+  if [[ $1 = link ]];then
+      echo "* [${titles[$last-1]#* }](https://github.com/$GITUSER/zet/tree/main/${titles[$last-1]%% *})"
+  else
+      echo "${titles[$last-1]%% *}"
+  fi
 }
 
 x_text() {

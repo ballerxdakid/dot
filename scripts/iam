@@ -1,10 +1,5 @@
 #!/usr/bin/bash
 
-x_usage() {
-    local cmds="${COMMANDS[@]}"
-    printf "usage: ${0##*/} (${cmds// /|})\n"
-}
-
 x_away() {
     _filter "$@"
     local message="$*"
@@ -27,7 +22,7 @@ x_talking() {
     _filter "$@"
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "☕ $message" 2>/dev/null
+    t "🎙️ $message" 2>/dev/null
 }
 
 x_live() {
@@ -44,13 +39,13 @@ x_recording() {
     t "🎬 $message" 2>/dev/null
 }
 
-x_mklinks() {
-    ln -s $(command -v "$EXE") away
-    ln -s $(command -v "$EXE") quiet
-    ln -s $(command -v "$EXE") talking
-    ln -s $(command -v "$EXE") live
-    ln -s $(command -v "$EXE") recording
-}
+# x_mklinks() {
+#     ln -s $(command -v "$EXE") away
+#     ln -s $(command -v "$EXE") quiet
+#     ln -s $(command -v "$EXE") talking
+#     ln -s $(command -v "$EXE") live
+#     ln -s $(command -v "$EXE") recording
+# }
 
 # --------------------- completion and delegation --------------------
 
@@ -89,6 +84,4 @@ for c in "${COMMANDS[@]}"; do
         exit $?
     fi
 done
-
-x_usage "$@"
 

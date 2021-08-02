@@ -1,2 +1,0 @@
-#!/usr/bin/bash
-exec mpv --fs --start=00:17  --fs-screen=1 "$CUTSCENES/revenge.webm" &>/dev/null

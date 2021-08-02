@@ -12,7 +12,6 @@ export DOTFILES="$HOME/repos/github.com/$GITUSER/dot"
 export SNIPPETS="$HOME/repos/github.com/$GITUSER/dot/snippets"
 export GHREPOS="$HOME/repos/github.com/$GITUSER/"
 export HELP_BROWSER=lynx
-export CUTSCENES="$HOME/Videos/cutscenes"
 
 export TERM=xterm-256color
 export HRULEWIDTH=73
@@ -226,7 +225,6 @@ alias ls='ls -h --color=auto'
 alias '?'=duck
 alias '??'=google
 alias '???'=bing
-alias x="exit"
 alias sl="sl -e"
 alias mkdirisosec='d=$(isosec);mkdir $d; cd $d'
 alias main='cd $(work main)'
@@ -242,6 +240,7 @@ alias temp='cd $(mktemp -d)'
 alias view='vi -R' # which is usually linked to vim
 alias c='printf "\e[H\e[2J"'
 alias clear='printf "\e[H\e[2J"'
+alias coin="clip '(yes|no)'"
 
 which vim &>/dev/null && alias vi=vim
 
@@ -283,7 +282,7 @@ newcmd() {
 
 owncomp=(
   pdf md zet yt gl kn auth pomo config iam
-  sshkey ws ./build build b ./setup
+  sshkey ws ./build build b ./setup clip x
 )
 
 for i in ${owncomp[@]}; do complete -C $i $i; done
