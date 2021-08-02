@@ -10,6 +10,7 @@ esac
 export GITUSER="$USER"
 export DOTFILES="$HOME/repos/github.com/$GITUSER/dot"
 export SNIPPETS="$HOME/repos/github.com/$GITUSER/dot/snippets"
+export CLIP_DATA="$HOME/repos/github.com/$GITUSER/dot/clip/data"
 export GHREPOS="$HOME/repos/github.com/$GITUSER/"
 export HELP_BROWSER=lynx
 
