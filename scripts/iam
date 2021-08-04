@@ -25,11 +25,18 @@ x_talking() {
     t "🎙️ $message" 2>/dev/null
 }
 
+x_ranting() {
+    _filter "$@"
+    local message="$*"
+    [[ -z "$message" ]] && read -r message -p "Message: "
+    t "🤬 $message" 2>/dev/null
+}
+
 x_live() {
     _filter "$@"
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "🔴 $message" 2>/dev/null
+    t "🤓 $message" 2>/dev/null
 }
 
 x_recording() {
