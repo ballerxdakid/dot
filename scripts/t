@@ -52,6 +52,6 @@ echo "$topic" >"$HOME/.tmux-live-right"
 twitch title "$topic" 
 chat "$topic"
 yt title live "$topic" &>/dev/null
-sleep 2
+# TODO add time stamp to yt live and bonk twitter cache
 twitter update "$topic #livestream #status #update $(yt live)" &>/dev/null
 gh status "$topic" &>/dev/null
