@@ -30,7 +30,7 @@ x_pending() {
         mv $i "$YOUTUBE_RECORDINGS/$(zet for "$i").mkv" || true
       done
       ;;
-    *) find "$YOUTUBE_RECORDINGS" -type f ;;
+    *) find "$YOUTUBE_RECORDINGS" -type f | sort;;
   esac
 }
 

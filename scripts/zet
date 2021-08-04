@@ -98,6 +98,66 @@ x_usage() {
     printf "usage: %s (%s)\n" "${0##*/}" "${cmds// /|}"
 }
 
+help[record]='
+The `record` command combines video and audio recording with the
+creation of a new zettel repo. The zettel it creates includes reminders
+to start recording and about the preferred content order for such
+videos.  '
+
+x_record() {
+    local topic
+    if type iam &>/dev/null; then
+        topic="$(topic)"
+        type iam &>/dev/null && iam recording "$*"
+    fi
+    local zetid=$(x_isosec)
+    mkdir "/tmp/$zetid"
+    echo -e "# $*\n\n*remember to start recording*\n\n1. Scenario\n2. Solution\n3. Steps\n4. Summary\n" > "/tmp/$zetid/README.md"
+    local zetid
+    zetid=$(x_import "/tmp/$zetid")
+    (( $? == 0 )) && rm -rf "$zetid"
+    x_edit "$zetid"
+    if [[ -n "$topic" ]]; then
+        t "$topic"
+    fi
+    echo "Don't forget to stop recording."
+}
+
+help[import]='
+The `import` command copies an exactly duplicate of the directory passed
+as the first argument. The first argument is assumed to be a unique
+zettel identifier (isosec). (Note that in the extemely unlikely event that an identifier conflicts, the import will fail.)
+'
+
+x_import() {
+    _filter "$@"
+    local dir="$(x_d)"
+    [[ ! -d "$1" ]] && return 1
+    mv "$1" "$dir"
+    x_commit "${1##*/}" &>/dev/null
+    echo "${1##*/}"
+}
+
+help[delete]='
+The `delete` command removes the indicated zettel directory from the zet repo and directory, and commits and pushes the removal. The word "last" can be used instead of a zettel identifier for convenience.'
+
+x_delete() {
+    _filter "$@"
+    local dir="$(x_d)"
+    local zetid="$1"
+    [[ -z "$zetid" || $zetid = last ]] && zetid=$(x_last)
+    if [[ ! -d "$dir/$zetid" ]]; then
+        echo "Does not exist '$zetid'"
+        return 1
+    fi
+    rm -rf "$dir/$zetid"
+    cd "$dir"
+    git add -A "$dir/$zetid" &>/dev/null
+    git commit -m "Deleted $zetid" &>/dev/null || true
+    git push &>/dev/null
+    cd -
+}
+
 help[each]='
 
 **Not yet implemented.**
