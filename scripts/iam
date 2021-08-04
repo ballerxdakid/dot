@@ -1,9 +1,8 @@
 #!/usr/bin/bash
 
 x_away() {
-    _filter "$@"
     local message="$*"
-    [[ -z "$message" ]] && message=$(now)
+    [[ -z "$message" ]] && message="away since $(date +%FT%T%z)"
     away="🐟 $message"
     t "$away" 2>/dev/null
     pomo stop
@@ -30,6 +29,7 @@ x_ranting() {
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🤬 $message" 2>/dev/null
+    echo "" >"$HOME/.tmux-live-right"
 }
 
 x_live() {
@@ -37,6 +37,7 @@ x_live() {
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🤓 $message" 2>/dev/null
+    echo "" >"$HOME/.tmux-live-right"
 }
 
 x_recording() {
@@ -44,6 +45,7 @@ x_recording() {
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🎬 $message" 2>/dev/null
+    echo "" >"$HOME/.tmux-live-right"
 }
 
 # x_mklinks() {
