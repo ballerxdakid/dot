@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+duck="https://lite.duckduckgo.com/lite?kd=-1&kp=-1&q=" # 🦆
+while IFS= read -r line; do
+  if [[ $line =~ \[([^\]]+)\]\(\) ]]; then
+     text="${BASH_REMATCH[1]}"
+     line=${line/\[*\]\(\)/[$text]($duck$(urlencode "$text"))}
+     echo "$line"
+  fi
+done
