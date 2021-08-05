@@ -388,6 +388,8 @@ x_edit() {
   local readme="$dir/README.md"
   [[ ! -r $readme ]] && echo "Not found." && return 1
   "${EDITOR:-vim}" "$readme"
+  read -r -p "Commit? " resp
+  [[ $resp =~ ^[yY] ]] && x_commit "$zetid"
 }
 x_e() { x_edit "$@"; }
 
