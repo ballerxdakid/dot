@@ -15,3 +15,12 @@ and [streaming faq].
 [workspace container]: <https://github.com/rwxrob/workspace>
 [zet notes]: <https://github.com/rwxrob/zet>
 [streaming faq]: <https://github.com/rwxrob/faq>
+
+## Separate Repos
+
+The following have grown large enough to warrant their own repos:
+
+Script|Summary
+:-:|-
+[bash-boiler]|Bash script starter template with completion, help, etc.
+[clip]|YouTube video clip utility
