@@ -6,8 +6,8 @@ x_away() {
     away="🐟 $message"
     t "$away" 2>/dev/null
     pomo stop
-    exec tmux -L live resize-pane -Z &
     fishies 
+    exec tmux -L live resize-pane -Z
 }
 
 x_quiet() {
@@ -29,15 +29,21 @@ x_ranting() {
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🤬 $message" 2>/dev/null
-    echo "" >"$HOME/.tmux-live-right"
 }
+
+x_gaming() {
+    _filter "$@"
+    local message="$*"
+    [[ -z "$message" ]] && read -r message -p "Message: "
+    t "🕹️ $message" 2>/dev/null
+}
+
 
 x_live() {
     _filter "$@"
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🤓 $message" 2>/dev/null
-    echo "" >"$HOME/.tmux-live-right"
 }
 
 x_recording() {
@@ -45,7 +51,6 @@ x_recording() {
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🎬 $message" 2>/dev/null
-    echo "" >"$HOME/.tmux-live-right"
 }
 
 # x_mklinks() {
