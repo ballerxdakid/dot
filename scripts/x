@@ -1,1 +1,2 @@
-clip
+#!/usr/bin/bash
+exec clip "$@"
