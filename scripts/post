@@ -1,3 +1,4 @@
 #!/usr/bin/bash
-chat "$@"
+shopt -s extglob
+chat "${1//+($'\n')/ }"
 twitter update "$@"
