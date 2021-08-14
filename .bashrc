@@ -8,12 +8,14 @@ esac
 #                           (also see envx)
 
 export GITUSER="$USER"
+export DOWNLOADS="$HOME/Downloads"
 export DOTFILES="$HOME/repos/github.com/$GITUSER/dot"
 export SNIPPETS="$HOME/repos/github.com/$GITUSER/dot/snippets"
-export CLIP_DATA="$HOME/repos/github.com/$GITUSER/clip/data"
+export CLIP_DATA="$HOME/repos/github.com/$GITUSER/cmd-clip/data"
 export CLIP_VOLUME=0
-export GHREPOS="$HOME/repos/github.com/$GITUSER/"
+export GHREPOS="$HOME/repos/github.com/$GITUSER"
 export HELP_BROWSER=lynx
+export PICTURES="$HOME/Pictures"
 
 export TERM=xterm-256color
 export HRULEWIDTH=73
@@ -88,6 +90,7 @@ mkdir -p "$SCRIPTS" &>/dev/null
 pathprepend \
   /usr/local/go/bin \
   ~/.local/bin \
+  "$GHREPOS/cmd-"* \
   "$SCRIPTS" 
 
 pathappend \
@@ -216,26 +219,25 @@ PROMPT_COMMAND="__ps1"
 
 test -n "$DISPLAY" && setxkbmap -option caps:escape &>/dev/null
 
+# ----------------- consistent, lexicographical sort -----------------
+#                (seriously, don't use sort without it)
+
+export LC_COLLATE=C
+
 # ------------------------------ aliases -----------------------------
+#      (use exec scripts instead, which work from vim and subprocs)
 
 unalias -a
-alias grep='grep -i --colour=auto'
-alias egrep='egrep -i --colour=auto'
-alias fgrep='fgrep -i --colour=auto'
-alias curl='curl -L'
-alias ls='ls -h --color=auto'
 alias '?'=duck
 alias '??'=google
 alias '???'=bing
-alias sl="sl -e"
 alias mkdirisosec='d=$(isosec);mkdir $d; cd $d'
-alias main='cd $(work main)'
 alias dot='cd $DOTFILES'
 alias scripts='cd $SCRIPTS'
 alias snippets='cd $SNIPPETS'
+alias ls='ls -h'
 alias free='free -h'
 alias df='df -h'
-alias top=htop
 alias chmox='chmod +x'
 alias sshh='sshpass -f $HOME/.sshpass ssh '
 alias temp='cd $(mktemp -d)'
@@ -269,15 +271,26 @@ envx() {
 
 test -e ~/.env && envx ~/.env 
 
+newcmdbox() { 
+  name="$1"
+  test -z "$name" && echo "usage: newcmdbox <name>" && return 1
+  test -z "$GHREPOS" && echo "GHREPOS not set" && return 1
+  test ! -d "$GHREPOS" && echo "Not found: $GHREPOS" && return 1
+  test -e "cmdbox-$name" && echo "exists: cmdbox-$name" && return 1
+  cd "$GHREPOS"
+  gh repo create -p rwxrob/template-cmdbox "cmdbox-$name"
+  cd "cmdbox-$name"
+} && export -f newcmdbox
+
 newcmd() { 
   name="$1"
   test -z "$name" && echo "usage: newcmd <name>" && return 1
   test -z "$GHREPOS" && echo "GHREPOS not set" && return 1
   test ! -d "$GHREPOS" && echo "Not found: $GHREPOS" && return 1
-  test -e "cmdbox-$name" && echo "exists: cmdbox-$name" && return 1
+  test -e "cmd-$name" && echo "exists: cmd-$name" && return 1
   cd "$GHREPOS"
-  gh repo create -p rwxrob/cmdbox-_foo "cmdbox-$name"
-  cd "cmdbox-$name"
+  gh repo create -p rwxrob/template-bash-command "cmd-$name"
+  cd "cmd-$name"
 } && export -f newcmd
 
 # ------------- source external dependencies / completion ------------
@@ -285,6 +298,7 @@ newcmd() {
 owncomp=(
   pdf md zet yt gl kn auth pomo config iam
   sshkey ws ./build build b ./setup clip x
+  ./cmd
 )
 
 for i in ${owncomp[@]}; do complete -C $i $i; done
