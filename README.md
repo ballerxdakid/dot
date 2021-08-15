@@ -1,26 +1,28 @@
 # Personal Dotfiles and Scripts
 
-![WIP](https://img.shields.io/badge/status-wip-red)
+Pilfer at your own peril. Mention <https://rwxrob.tv> if you do. Stop by
+and chat sometime.
 
-WARNING: This thing is *never* complete, full of bugs, and always
-changing. [Pilfer](https://duck.com/lite?q=Pilfer) at your own risk.
-(But *do* pilfer. I don't mind.)
+## Installation
 
-*For installation information and sampling see the [workspace container]
-that depends on this repo.*
+For installation information and sampling see the [workspace container]
+that depends on this repo.
+
+Also see the [scripts `README.md` Installation][scripts] as well.
+
+[workspace container]: <https://github.com/rwxrob/workspace>
+[scripts]: scripts/#installation
+
+## More Information
 
 For questions about design decisions and setup consider my [zet notes]
 and [streaming faq].
 
-[workspace container]: <https://github.com/rwxrob/workspace>
 [zet notes]: <https://github.com/rwxrob/zet>
 [streaming faq]: <https://github.com/rwxrob/faq>
 
-## Separate Repos
+## Legal
 
-The following have grown large enough to warrant their own repos:
-
-Script|Summary
-:-:|-
-[bash-boiler]|Bash script starter template with completion, help, etc.
-[clip]|YouTube video clip utility
+Copyright 2021 Rob Muhlestein <rob@rwx.gg>  
+Released under Apache-1.0 License  
+Please mention <https://rwxrob.tv>
