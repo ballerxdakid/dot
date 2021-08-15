@@ -11,16 +11,18 @@ marquee() {
   #cols=${cols%% *}
   local topicw=${#topic}
   local timew=${#time}
+  local pomo=$(pomo)
+  local pomow=${#pomo}
   local cols=85
-  local remain=$((cols - (timew + topicw)))
+  local remain=$((cols - (timew + topicw + 1 + pomow)))
   if (( remain > 0 )); then
-    echo "$time $topic"
+    echo "$time $pomo $topic"
     return
   fi
   if (( epoch%20 < 10 ));then
-    echo "$topic  $(pomo)"
+    echo "$topic $pomo"
   else
-    echo "$time $(pomo)"
+    echo "$time $pomo"
   fi
 }
 

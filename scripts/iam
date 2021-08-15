@@ -6,65 +6,55 @@ x_away() {
     away="🐟 $message"
     t "$away" 2>/dev/null
     pomo stop
-    fishies 
-    exec tmux -L live resize-pane -Z
+    fishies
 }
 
-x_quiet() {
-    _filter "$@"
+x_working() {
+    _filter "$@" && return $?
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "🔇 $message" 2>/dev/null
+    t "☕ $message" 2>/dev/null
 }
 
-x_talking() {
-    _filter "$@"
+x_chatting() {
+    _filter "$@" && return $?
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
-    t "🎙️ $message" 2>/dev/null
+    t "💬 $message" 2>/dev/null
 }
 
 x_ranting() {
-    _filter "$@"
+    _filter "$@" && return $?
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🤬 $message" 2>/dev/null
 }
 
+x_partying() {
+    _filter "$@" && return $?
+    local message="$*"
+    [[ -z "$message" ]] && read -r message -p "Message: "
+    t "🎉 $message" 2>/dev/null
+}
+
 x_gaming() {
-    _filter "$@"
+    _filter "$@" && return $?
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🕹️ $message" 2>/dev/null
 }
 
-
-x_live() {
-    _filter "$@"
-    local message="$*"
-    [[ -z "$message" ]] && read -r message -p "Message: "
-    t "🤓 $message" 2>/dev/null
-}
-
 x_recording() {
-    _filter "$@"
+    _filter "$@" && return $?
     local message="$*"
     [[ -z "$message" ]] && read -r message -p "Message: "
     t "🎬 $message" 2>/dev/null
 }
 
-# x_mklinks() {
-#     ln -s $(command -v "$EXE") away
-#     ln -s $(command -v "$EXE") quiet
-#     ln -s $(command -v "$EXE") talking
-#     ln -s $(command -v "$EXE") live
-#     ln -s $(command -v "$EXE") recording
-# }
-
 # --------------------- completion and delegation --------------------
 
 _filter(){
-  (( $# > 0 )) && return 0
+  (( $# > 0 )) && return 1
   while IFS= read -ra args; do
     "${FUNCNAME[1]}" "${args[@]}"
   done

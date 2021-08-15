@@ -1,50 +1,32 @@
 # Scripts
 
-Pilfer as you will, but use at your own peril.
+Pilfer at your own peril. You'll find mostly just bash and perl. If
+that's not your thing, don’t waste your time — especially if you use
+`zsh-it` for anything. If you have questions, come ask me on
+<https://rwxrob.tv>.
+
+More substantial commands have their own repos prefixed with [`cmd-`]
+derived [`template-bash-command`]. Other commands (like the popular
+[`pomo`] tool) are compiled go utilities with repos prefixed with
+[`cmdbox-`].
+
+[`template-bash-command`]: <https://github.com/rwxrob/template-bash-command>
+[`cmdbox-`]: <https://github.com/search?q=user%3Arwxrob+cmdbox->
+[`cmd-`]: <https://github.com/search?q=user%3Arwxrob+cmd->
+[`pomo`]: <https://github.com/rwxrob/cmdbox-pomo>
 
 ## Installation
 
-Best way to use these is grab them and put them into your own stuff.
-Technically, you are supposed to mention me if you do that (per Apache
-license), but whatever.
+Best way to use these is to grab them and put them into your own stuff.
+If the shebang lines don't work it means you are using a shitty operating
+system (not my problem, fuck off) or you want to use them on something
+besides Linux (again, fuck off). If you are one of the very few wanting
+to put something on Alpine (the god of all container OS distros) then
+you probably won't even read this and already will have fixed the other
+stuff to your liking.
 
-The `.bashrc` in this `dot` repo is set to look in
-`~/.local/bin/scripts` for stuff (and sets `$SCRIPTS` to that location)
-but many of these scripts only work if `$SCRIPTS` is pointing to
-something within a GitHub repo. So you might want to override that in
-your `.bash_{personal,private,work}` file (from another repo,
-presumably).
+## Legal
 
-## What's a "shortcut command"?
-
-A *shortcut command* is an alternative to aliases (which do not work
-with subprocesses such as from within an editor session. You will see
-this term a lot in the commit messages. Usually such a command will only
-be two lines long.
-
-## POSIX, Perl, or Python
-
-Even though I have some `bash` still in here, my goal these days is to
-use nothing but POSIX shell, `perl`, and `python3` for everything. POSIX
-shell is the most widely supported (for Dockerfile builds and such) and
-`perl` is the fastest prototyping language on the planet (unless you
-*really* need OOP in which case `python` is the best choice for
-*prototyping*. (Surprisingly enough, `python` and `perl` address
-completely different needs and use cases that rarely *actually* overlap,
-but the world is full of morons who try to argue they are the same.)
-
-## Perl Power Scripts
-
-Perl was primarily created to replace `sed`, `awk`, `tr`, and `cut` and
-did it so well it became the de facto lingua franca of all server-side
-web development for over two decades.
-
-I really hate `sed` for all the reasons Larry Wall did, but mostly its
-absolutely horrible BRE syntax. Using any of the PCRE variations are
-not POSIX, might as well just use `perl` instead in those cases.
-
-Script|Full|Purpose
-|:-:|:-:|-
-`pie`|`perl -p -i -e`|Inplace edit
-`pae`|`perl -paE`|Replace `sed` and `awk` (prints line)
-`map`|`perl -aE`|Replace `sed` and `awk` (no printing)
+Copyright 2021 Rob Muhlestein <rob@rwx.gg>  
+Released under Apache-1.0 License  
+Please mention <https://rwxrob.tv>

@@ -1,16 +1,13 @@
-#!/bin/sh
+#!/usr/bin/bash
 
-if test -z "$PDFDIR";then
-  warn 'The `PDFDIR` env var not set.'
-  exit 0
-fi
+[[ -z "$PDFS" ]] && echo 'PDFS dir path not set' && exit 1
 
 list() {
-  find "$PDFDIR" -name "*.pdf" -exec basename {} \;
+  find "$PDFS" -name "*.pdf" -exec basename {} \;
 }
 
 usage() {
-  usageln 'list|usage|<pdf>'
+  echo 'usage: list|usage|<pdf>'
 }
 
 if test -n "$COMP_LINE"; then
@@ -26,7 +23,7 @@ esac
 
 # actually we have a pdf name, not a command
 # if gotten this far
-pdfpath="$PDFDIR/$1"
+pdfpath="$PDFS/$1"
 
 # always open using GL in dark (inverted) mode
 if [ -r "$pdfpath" ];then
