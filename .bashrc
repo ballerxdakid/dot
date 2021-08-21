@@ -207,6 +207,7 @@ alias view='vi -R' # which is usually linked to vim
 alias c='printf "\e[H\e[2J"'
 alias clear='printf "\e[H\e[2J"'
 alias coin="clip '(yes|no)'"
+alias grep="grep -P"
 
 _have vim && alias vi=vim
 
