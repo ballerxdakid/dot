@@ -23,9 +23,11 @@ x_modes() {
 }
 
 _basic() {
-  local message="$*"
+  local message="$*" buf
   [[ -z "$message" ]] && read -r message -p "Message: "
-  t "${modes[$CMD]} $CMD $message" 2>/dev/null
+  buf="${modes[$CMD]} ${CMD^} $message"
+  [[ -e "$DIR/muted" ]] && buf+=" ${modes[muted]}"
+  t "$buf" 2>/dev/null
   echo "$CMD" > "$DIR/mode"
 }
 
@@ -39,7 +41,7 @@ x_gaming() { _basic "$@"; }
 x_away() {
   local message="$*"
   [[ -z "$message" ]] && message="since $(date +%FT%T%z)"
-  away="🐟 away $message"
+  away="🐟 Away $message"
   t "$away" 2>/dev/null
   pomo stop
   fishies

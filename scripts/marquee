@@ -9,11 +9,11 @@ marquee() {
   local time="$(date +"%A, %B %-e, %Y, %-l:%M%P %Z%0z")"
   #local -i cols=$(tmux -L live list-panes -F '#{pane_width}'|head -1 )
   #cols=${cols%% *}
+  local cols=$(tput cols)
   local topicw=${#topic}
   local timew=${#time}
   local pomo=$(pomo)
   local pomow=${#pomo}
-  local cols=85
   local remain=$((cols - (timew + topicw + 1 + pomow)))
   if (( remain > 0 )); then
     echo "$time $pomo $topic"
