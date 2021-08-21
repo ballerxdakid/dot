@@ -1,64 +1,60 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-x_away() {
-    local message="$*"
-    [[ -z "$message" ]] && message="away since $(date +%FT%T%z)"
-    away="🐟 $message"
-    t "$away" 2>/dev/null
-    pomo stop
-    fishies
-}
+declare B=$'\033[1m' X=$'\033[0m'
+[[ ! -t 1 ]] && B= && X=
 
-x_working() {
-    _filter "$@" && return $?
-    local message="$*"
-    [[ -z "$message" ]] && read -r message -p "Message: "
-    t "☕ $message" 2>/dev/null
-}
+DIR="$HOME/.local/share/iam"
+[[ -d "$DIR" ]] || mkdir -p "$DIR" &>/dev/null
 
-x_chatting() {
-    _filter "$@" && return $?
-    local message="$*"
-    [[ -z "$message" ]] && read -r message -p "Message: "
-    t "💬 $message" 2>/dev/null
-}
+declare -A modes
+modes[muted]='🔇'
+modes[away]='🐟'
+modes[working]='☕'
+modes[chatting]='💬'
+modes[ranting]='🤬'
+modes[recording]='🎬'
+modes[partying]='🎉'
+modes[gaming]='🕹️ '
 
-x_ranting() {
-    _filter "$@" && return $?
-    local message="$*"
-    [[ -z "$message" ]] && read -r message -p "Message: "
-    t "🤬 $message" 2>/dev/null
-}
-
-x_partying() {
-    _filter "$@" && return $?
-    local message="$*"
-    [[ -z "$message" ]] && read -r message -p "Message: "
-    t "🎉 $message" 2>/dev/null
-}
-
-x_gaming() {
-    _filter "$@" && return $?
-    local message="$*"
-    [[ -z "$message" ]] && read -r message -p "Message: "
-    t "🕹️ $message" 2>/dev/null
-}
-
-x_recording() {
-    _filter "$@" && return $?
-    local message="$*"
-    [[ -z "$message" ]] && read -r message -p "Message: "
-    t "🎬 $message" 2>/dev/null
-}
-
-# --------------------- completion and delegation --------------------
-
-_filter(){
-  (( $# > 0 )) && return 1
-  while IFS= read -ra args; do
-    "${FUNCNAME[1]}" "${args[@]}"
+x_modes() {
+  for i in "${!modes[@]}"; do
+    echo "${modes[$i]} ${B}${i^}$X"
   done
 }
+
+_basic() {
+  local message="$*"
+  [[ -z "$message" ]] && read -r message -p "Message: "
+  t "${modes[$CMD]} $CMD $message" 2>/dev/null
+  echo "$CMD" > "$DIR/mode"
+}
+
+x_working() { _basic "$@"; }
+x_chatting() { _basic "$@"; }
+x_ranting() { _basic "$@"; }
+x_partying() { _basic "$@"; }
+x_recording() { _basic "$@"; }
+x_gaming() { _basic "$@"; }
+
+x_away() {
+  local message="$*"
+  [[ -z "$message" ]] && message="since $(date +%FT%T%z)"
+  away="🐟 away $message"
+  t "$away" 2>/dev/null
+  pomo stop
+  fishies
+}
+
+x_muted() { touch "$DIR/muted"; }
+x_speaking() { rm "$DIR/muted"; }
+x_mode() {
+  [[ -e "$DIR/mode" ]] || return 1
+  echo -n "$(<"$DIR/mode")"
+  [[ -e "$DIR/muted" ]] && echo -n " muted"
+  echo
+}
+
+#--------------------- completion and delegation --------------------
 
 while IFS= read -r line; do
     [[ $line =~ ^declare\ -f\ x_ ]] || continue
