@@ -4,14 +4,15 @@ set -e
 # If you prefer to not have dependencies on the helper commands for the
 # following you can simply set them directly:
 
-TOKEN=$(auth token twitch)
-CLIENTID=$(auth get id twitch)
-CLIENTSEC=$(auth get secret twitch)
-USERID=$(config twitch.id)
-TITLE=$(config twitch.title)
-LANG=$(config twitch.lang)
-GAMEID=$(config twitch.gameid)
-GAME=$(config twitch.game)
+: "${TOKEN:="$(auth token twitch)"}"
+: "${CLIENTID:="$(auth get id twitch)"}"
+: "${CLIENTSEC:="$(auth get secret twitch)"}"
+: "${TWITCH_ID:=447179030}"
+: "${TWITCH_USER:=rwxrob}"
+: "${TWITCH_LANG:=en}"
+: "${TWITCH_GAME:="Science \u0026 Technology"}"
+: "${TWITCH_GAMEID:=509670}"
+: "${TWITCH_TITLE:="https://github.com/rwxrob/boost"}"
 
 # Title changes the Title stream info (Go Live notification cannot be
 # changed from API). If the special 'default' title is passed it will
@@ -24,17 +25,17 @@ GAME=$(config twitch.game)
 # a space (ex: "Title [20210508163250]")
 
 title() {
-  test -z "$1" && echo "$TITLE" && return
+  test -z "$1" && echo "$TWITCH_TITLE" && return
   if test "${1%% *}" = default; then
-    title="$TITLE"
+    title="$TWITCH_TITLE"
   else
     title="$*"
   fi
-  resp=$(curl -sS -X PATCH "https://api.twitch.tv/helix/channels?broadcaster_id=$USERID" \
+  resp=$(curl -sS -X PATCH "https://api.twitch.tv/helix/channels?broadcaster_id=$TWITCH_ID" \
     -H "Authorization: Bearer $TOKEN" \
     -H "Client-Id: $CLIENTID" \
     -H 'Content-Type: application/json' \
-    --data-raw '{"game_id":"'$GAMEID'", "title":"'"$title"'", "broadcaster_language":"'$LANG'"}' | jq -r '[.status,.message] | @tsv')
+    --data-raw '{"game_id":"'$TWITCH_GAMEID'", "title":"'"$title"'", "broadcaster_language":"'$TWITCH_LANG'"}' | jq -r '[.status,.message] | @tsv')
 }
 
 ## ------------------------------- main -------------------------------
