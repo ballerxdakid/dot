@@ -46,12 +46,11 @@ if test "$topic" = default; then
   topic="$(head -1 $HOME/.banner)"
 else
   echo "$topic" >>"$HOME/.topics"
-  w
 fi
 echo "$topic" >"$HOME/.tmux-live-right"
 twitch title "$topic" 
 chat "$topic"
 yt live title "$topic" &>/dev/null
 # TODO add time stamp to yt live and bonk twitter cache
-twitter update "$topic #livestream #status #update $(yt live)" &>/dev/null
+twitter update "$topic #livestream #status #update rwxrob.tv" &>/dev/null
 gh status "$topic" &>/dev/null
