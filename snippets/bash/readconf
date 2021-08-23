@@ -1,0 +1,42 @@
+# shellcheck shell=bash
+#
+# Will read from a default configuration file that matches the name of
+# the executable (by default) or the specific path if provided as the
+# first and only argument generating a CONF associative array global. If
+# an EXE environment variable is found will use it as the name of the
+# current executable, otherwise it will be assigned the base name
+# of the $0 special variable. Follows the open desktop standard:
+#
+#   1. Look for $XDG_CONFIG_HOME/config
+#   2. Look for $HOME/.config/$EXE/config
+#
+# Assumes basic UNIX configuration file syntax:
+#
+#   * Ignore blank and lines beginning with space or octothorpe (#)
+#   * Read first word of line as configuration key
+#   * Read one or more space separators after key (white space, =, :)
+#   * Read everthing else on line into value
+#   * Parse all values as strings
+#   * No escaping whatsoever
+#
+# For more complicated configurations use YAML or JSON.
+#
+# Note that this function does not create the file. It returns 1 if the
+# file is not found or fails to parse.
+
+: "${EXE:="${0##*/}"}"
+: "${XDG_CONFIG_HOME:="$HOME/.config"}"
+
+declare -A CONF
+
+readconf() {
+  local path=${1:-"$XDG_CONFIG_HOME/$EXE/config"}
+  while IFS= read -r line; do
+    [[ $line =~ ^([^[:space:]#]+)[[:space:]=:]+(.+)$ ]] || continue
+    CONF[${BASH_REMATCH[1]}]="${BASH_REMATCH[2]}"
+  done < "$path"
+}
+
+dumpconf() {
+  paste -d= <(printf "%s\n" "${!CONF[@]}") <(printf "%s\n" "${CONF[@]}")
+}
