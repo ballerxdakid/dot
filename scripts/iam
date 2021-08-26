@@ -8,6 +8,7 @@ DIR="$HOME/.local/share/iam"
 
 declare -A modes
 modes[muted]='🔇'
+modes[live]='🔴'
 modes[away]='🐟'
 modes[working]='☕'
 modes[chatting]='💬'
@@ -22,21 +23,25 @@ x_modes() {
   done
 }
 
+x_live() {
+  ps -ef |grep -v grep| grep obs &>/dev/null
+  test $? && echo "${modes[live]}"
+}
+
 _basic() {
   local message="$*" buf
   [[ -z "$message" ]] && read -r message -p "Message: "
   buf="${modes[$CMD]} $CMD $message"
-  [[ -e "$DIR/muted" ]] && buf+=" ${modes[muted]}"
   t "$buf" 2>/dev/null
   echo "$CMD" > "$DIR/mode"
 }
 
 x_working() { _basic "$@"; }
 x_chatting() { _basic "$@"; }
-x_ranting() { _basic "$@"; }
-x_partying() { _basic "$@"; }
-x_recording() { _basic "$@"; }
-x_gaming() { _basic "$@"; }
+x_ranting() { x_speaking; _basic "$@"; }
+x_partying() { x_speaking; _basic "$@"; }
+x_recording() { x_speaking; _basic "$@"; }
+x_gaming() { x_speaking; _basic "$@"; }
 
 x_away() {
   local message="$*"
@@ -51,10 +56,17 @@ x_away() {
 x_muted() { touch "$DIR/muted"; }
 x_speaking() { rm "$DIR/muted"; }
 x_mode() {
+  local mode muted
   [[ -e "$DIR/mode" ]] || return 1
-  echo -n "$(<"$DIR/mode")"
-  [[ -e "$DIR/muted" ]] && echo -n " muted"
-  echo
+  mode="$(<"$DIR/mode")"
+  [[ -e "$DIR/muted" ]] && muted=muted
+  if [[ $1 = emoji ]]; then
+    printf "%s" "${modes[$mode]}"
+    [[ -n "$muted" ]] && echo " ${modes[$muted]}"
+  else
+    printf "%s" "$mode"
+    [[ -n "$muted" ]] && echo " $muted"
+  fi
 }
 
 #--------------------- completion and delegation --------------------
