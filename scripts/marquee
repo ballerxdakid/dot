@@ -11,8 +11,8 @@ marquee() {
   local topic time right cols pomo
   local -i topicremain timeremain timew topicw
   local -a timebar topicbar
-  topic="$(topic)" topic="${topic#* }" topic="${topic#* }"
-  pomo="$(pomo)" pomo=${pomo%%m*} pomo+=${pomo:+m}
+  topic="$(topic)" topic="${topic#* }"
+  pomo="$(pomo)" pomo=${pomo%%m*} pomo=${pomo%%s*} 
   mode="$(iam mode emoji)"
   zet="zet:$(zet current)"
   time="$(date +"%A, %B %-e, %Y, %-l:%M%P %Z%0z")"
@@ -24,12 +24,12 @@ marquee() {
   topicbarb="${topicbar[*]}"
   topicremain=$(( $(tput cols) - ${#topicbarb} ))
   timeremain=$(( $(tput cols) - ${#timebarb} ))
-  topicspace=$(( topicremain - ${#mode} - ${#zet} - 8 ))
-  timespace=$(( timeremain - ${#mode} - ${#zet} - 8 ))
+  topicspace=$(( topicremain - ${#mode} - ${#zet} - 19 ))
+  timespace=$(( timeremain - ${#mode} - ${#zet} - 20 ))
   if (( $(date +%s)%20 < 10 ));then
-    echo "$topicbarb $(repeat $' ' "$topicspace") $zet $mode"
+    echo "$topicbarb $(repeat $' ' "$topicspace") rwxrob.tv $zet $mode "
   else
-    echo "$timebarb $(repeat $' ' "$timespace") $zet $mode"
+    echo "$timebarb $(repeat $' ' "$timespace") rwxrob.tv $zet $mode "
   fi
 }
 
