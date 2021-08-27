@@ -57,16 +57,19 @@ x_away() {
 x_muted() { touch "$DIR/muted"; }
 x_speaking() { rm "$DIR/muted"; }
 x_mode() {
-  local mode muted
+  local mode muted live
+  live=$(x_live)
   [[ -e "$DIR/mode" ]] || return 1
   mode="$(<"$DIR/mode")"
   [[ -e "$DIR/muted" ]] && muted=muted
   if [[ $1 = emoji ]]; then
     printf "%s" "${modes[$mode]}"
-    [[ -n "$muted" ]] && echo " ${modes[$muted]}"
+    [[ -n "$muted" ]] && echo -n " ${modes[$muted]}"
+    echo " $live"
   else
     printf "%s" "$mode"
-    [[ -n "$muted" ]] && echo " $muted"
+    [[ -n "$muted" ]] && echo -n " $muted"
+    echo " $live"
   fi
 }
 
