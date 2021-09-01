@@ -11,7 +11,7 @@ modes[muted]='🔇'
 modes[live]='🔴'
 modes[away]='🐟'
 modes[focusing]='☕'
-modes[working]='💰'
+modes[working]='🏢'
 modes[chatting]='💬'
 modes[ranting]='🤬'
 modes[recording]='🎬'
@@ -32,44 +32,40 @@ x_live() {
 _basic() {
   local message="$*" buf
   [[ -z "$message" ]] && read -r message -p "Message: "
-  buf="${modes[$CMD]} $CMD $message"
+  buf="${modes[$CMD]} $message"
+  [[ -n "$(x_muted)" ]] && buf="${buf/\ /\ ${modes[muted]}\ }"
   t "$buf" 2>/dev/null
   echo "$CMD" > "$DIR/mode"
 }
 
-x_working() { _basic "$@"; }
-x_chatting() { _basic "$@"; }
-x_ranting() { x_speaking; _basic "$@"; }
-x_partying() { x_speaking; _basic "$@"; }
-x_recording() { x_speaking; _basic "$@"; }
-x_gaming() { x_speaking; _basic "$@"; }
-
-x_away() {
-  local message="$*"
-  [[ -z "$message" ]] && message="since $(date +%FT%T%z)"
-  away="🐟 away $message"
-  t "$away" 2>/dev/null
-  echo "$CMD" > "$DIR/mode"
-  pomo stop
-  fishies
+x_working() { x_mute; _basic "$@"; }
+x_chatting() { x_unmute; _basic "$@"; }
+x_ranting() { x_unmute; _basic "$@"; }
+x_partying() { x_unmute; _basic "$@"; }
+x_recording() { x_unmute; _basic "$@"; }
+x_gaming() { x_unmute; _basic "$@"; }
+x_focusing() { x_mute; _basic "$@"; }
+x_away() { x_mute; _basic "$@"; }
+x_muted() {
+  [[ -e "$DIR/muted" ]] && echo "${modes[muted]}" && return 0
+  return 1
 }
-
-x_muted() { touch "$DIR/muted"; }
-x_speaking() { rm "$DIR/muted"; }
+x_mute() { touch "$DIR/muted"; }
+x_unmute() { rm "$DIR/muted"; }
 x_mode() {
   local mode muted live
   live=$(x_live)
   [[ -e "$DIR/mode" ]] || return 1
   mode="$(<"$DIR/mode")"
-  [[ -e "$DIR/muted" ]] && muted=muted
+  x_muted &>/dev/null && muted=muted
   if [[ $1 = emoji ]]; then
     printf "%s" "${modes[$mode]}"
     [[ -n "$muted" ]] && echo -n " ${modes[$muted]}"
-    echo " $live"
+    echo " ${modes[live]}"
   else
     printf "%s" "$mode"
     [[ -n "$muted" ]] && echo -n " $muted"
-    echo " $live"
+    [[ -n "$live" ]] && echo " live"
   fi
 }
 
