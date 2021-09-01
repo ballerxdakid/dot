@@ -1,8 +1,5 @@
 #!/bin/bash
 while IFS= read -r line;do
   key=${line%%=*}
-  echo "
-command_$key() {
-  command_config $key \"\$@\"
-}"
+  echo "x.$key() { x.config $key \"\$@\"; }"
 done
