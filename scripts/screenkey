@@ -18,7 +18,7 @@
   --compr-cnt 1 \
   -g "600x100+3000+1080" \
   -p fixed \
-  -f "UbuntuMono Nerd Font" \
+  -f "UbuntuMono" \
   --font-color "#EBDBB2" \
   --bg-color "#222222" \
   --bak-mode full \
