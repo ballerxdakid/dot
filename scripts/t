@@ -48,6 +48,10 @@ else
   echo "$topic" >>"$HOME/.topics"
 fi
 echo "$topic" >"$HOME/.tmux-live-right"
+if [[ $topic =~ [dD]ota ]]; then
+  export TWITCH_GAMEID=29595
+  export TWITCH_GAME="Dota 2"
+fi
 twitch title "$topic" 
 chat "$topic"
 yt live title "$topic" &>/dev/null

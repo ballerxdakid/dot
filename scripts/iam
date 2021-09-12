@@ -31,7 +31,7 @@ x_live() {
 
 _basic() {
   local message="$*" buf
-  [[ -z "$message" ]] && read -r message -p "Message: "
+  [[ -z "$message" ]] && return 1
   buf="${modes[$CMD]} $message"
   [[ -n "$(x_muted)" ]] && buf="${buf/\ /\ ${modes[muted]}\ }"
   t "$buf" 2>/dev/null
@@ -51,7 +51,7 @@ x_muted() {
   return 1
 }
 x_mute() { touch "$DIR/muted"; }
-x_unmute() { rm "$DIR/muted"; }
+x_unmute() { [[ -x "$DIR/muted" ]] && rm "$DIR/muted"; }
 x_mode() {
   local mode muted live
   live=$(x_live)
