@@ -252,7 +252,7 @@ autocmd BufWritePost *.md silent !toemoji %
 autocmd BufWritePost *.md silent !toduck %
 
 " fill in anything beginning with @ with a link to twitch to it
-autocmd vimleavepre *.md !perl -p -i -e 's, @(\w+), [\\@\1](https://twitch.tv/\1),g' %
+" autocmd vimleavepre *.md !perl -p -i -e 's, @(\w+), [\\@\1](https://twitch.tv/\1),g' %
 
 " make Y consitent with D and C (yank til end)
 map Y y$
