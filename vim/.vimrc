@@ -1,6 +1,9 @@
 " designed for vim 8+
-" (see https://rwx.gg/vi for help)
-let skip_defaults_vim=1
+
+if has("eval")                               " vim-tiny lacks 'eval'
+  let skip_defaults_vim = 1
+endif
+
 set nocompatible
 
 "####################### Vi Compatible (~/.exrc) #######################
@@ -46,7 +49,9 @@ if v:version >= 800
 endif
 
 " mark trailing spaces as errors
-match ErrorMsg '\s\+$'
+if has("match")
+  match ErrorMsg '\s\+$'
+endif
 
 " enough for line numbers + gutter within 80 standard
 set textwidth=72
@@ -85,7 +90,9 @@ set shortmess=aoOtTI
 set viminfo='20,<1000,s1000
 
 " not a fan of bracket matching or folding
-let g:loaded_matchparen=1
+if has("eval") " vim-tiny detection
+  let g:loaded_matchparen=1
+endif
 set noshowmatch
 
 " wrap around when searching
@@ -127,7 +134,9 @@ set hidden
 set history=100
 
 " here because plugins and stuff need it
-syntax enable
+if has("syntax")
+  syntax enable
+endif
 
 " faster scrolling
 set ttyfast
@@ -240,6 +249,15 @@ else
   autocmd vimleavepre *.go !gofmt -w % " backup if fatih fails
 endif
 
+" format perl on save
+if has("eval") " vim-tiny detection
+fun! s:Perltidy()
+  let l:pos = getcurpos()
+  silent execute '%!perltidy -i=2'
+  call setpos('.', l:pos)
+endfun
+"autocmd FileType perl autocmd BufWritePre <buffer> call s:Perltidy()
+endif
 
 "autocmd vimleavepre *.md !perl -p -i -e 's,(?<!\[)my `(\w+)` (package|module|repo|command|utility),[my `\1` \2](https://gitlab.com/rwxrob/\1),g' %
 
@@ -266,15 +284,6 @@ nnoremap <C-L> :nohl<CR><C-L>
 " enable omni-completion
 set omnifunc=syntaxcomplete#Complete
 
-" format perl on save
-fun! s:Perltidy()
-  let l:pos = getcurpos()
-  silent execute '%!perltidy -i=2'
-  call setpos('.', l:pos)
-endfun
-"autocmd FileType perl autocmd BufWritePre <buffer> call s:Perltidy()
-"
-
 " force some files to be specific file type
 au bufnewfile,bufRead $SNIPPETS/md/* set ft=pandoc
 au bufnewfile,bufRead $SNIPPETS/sh/* set ft=sh
@@ -297,6 +306,7 @@ au bufnewfile,bufRead /tmp/psql.edit.* set syntax=sql
 au bufnewfile,bufRead doc.go set spell
 
 "fix bork bash detection
+if has("eval")  " vim-tiny detection
 fun! s:DetectBash()
     if getline(1) == '#!/usr/bin/bash' || getline(1) == '#!/bin/bash'
         set ft=bash
@@ -304,15 +314,18 @@ fun! s:DetectBash()
     endif
 endfun
 autocmd BufNewFile,BufRead * call s:DetectBash()
+endif
 
 " displays all the syntax rules for current position, useful
 " when writing vimscript syntax plugins
+if has("syntax")
 function! <SID>SynStack()
   if !exists("*synstack")
     return
   endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+endif
 
 " start at last place you were editing
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
