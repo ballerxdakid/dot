@@ -11,6 +11,7 @@ emoji[chat]=💬
 emoji[pomo]=🍅
 emoji[warning]=⚠️
 emoji[rant]=🤬
+emoji[tv]=📺
 
 toemoji() {
   local in=/dev/stdin
