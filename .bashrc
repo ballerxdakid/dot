@@ -88,7 +88,7 @@ pathappend() {
     PATH=${PATH/%":$arg"/}
     export PATH="${PATH:+"$PATH:"}$arg"
   done
-}
+} && export pathappend
 
 pathprepend() {
   for arg in "$@"; do
@@ -98,7 +98,7 @@ pathprepend() {
     PATH=${PATH/%":$arg"/}
     export PATH="$arg${PATH:+":${PATH}"}"
   done
-}
+} && export pathprepend
 
 # remember last arg will be first in path
 pathprepend \
@@ -256,10 +256,12 @@ for i in "${owncomp[@]}"; do complete -C "$i" "$i"; done
 _have gh && . <(gh completion -s bash)
 _have pandoc && . <(pandoc --bash-completion)
 _have kubectl && . <(kubectl completion bash)
+_have k && complete -o default -F __start_kubectl k
 _have kind && . <(kind completion bash)
 _have yq && . <(yq shell-completion bash)
 _have helm && . <(helm completion bash)
-_have k && complete -o default -F __start_kubectl k
+_have minikube && . <(minikube completion bash)
+_have mk && complete -o default -F __start_minikube mk
 _have docker && _source_if "$HOME/.local/share/docker/completion" # d
 
 # -------------------- personalized configuration --------------------
