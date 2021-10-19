@@ -24,8 +24,8 @@ marquee() {
   topicbarb="${topicbar[*]}"
   topicremain=$(( $(tput cols) - ${#topicbarb} ))
   timeremain=$(( $(tput cols) - ${#timebarb} ))
-  topicspace=$(( topicremain - ${#mode} - ${#zet} - 19 ))
-  timespace=$(( timeremain - ${#mode} - ${#zet} - 20 ))
+  topicspace=$(( topicremain - ${#mode} - ${#zet} - 5))
+  timespace=$(( timeremain - ${#mode} - ${#zet} - 5))
   if (( $(date +%s)%20 < 10 ));then
     echo "$topicbarb $(repeat $' ' "$topicspace") rwxrob.tv $zet $mode "
   else
