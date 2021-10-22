@@ -4,12 +4,17 @@ p=3.14
 i=0
 
 reset () {
+  /usr/bin/reset
   printf "\033[H\033[2J\033[0m"
   exit
 }
 
+trap "setterm --cursor on; stty echo; echo ${clear}; exit; trap -- - SIGINT SIGTERM" SIGTERM SIGINT
 trap reset EXIT
 trap reset SIGINT
+
+stty -echo
+setterm --cursor off
 
 while true; do 
   i=$(bc -l <<< "$i+0.04")
