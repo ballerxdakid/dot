@@ -12,12 +12,13 @@
   #-g "600x100+3380+1080" \
   #-g "600x100+3239+1080" \
   #-g "600x100+3000+1080" \
+  #-g "600x80+3000+1065" \
 
 /usr/bin/screenkey \
   --persist \
   -t 4 \
   --compr-cnt 1 \
-  -g "600x80+3000+1065" \
+  -g "600x80+3000+1062" \
   -p fixed \
   -f "UbuntuMono" \
   --font-color "#EBDBB2" \

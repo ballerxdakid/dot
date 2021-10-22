@@ -13,8 +13,12 @@ modes[away]='🐟'
 modes[focusing]='☕'
 modes[working]='🏢'
 modes[chatting]='💬'
+modes[random]='💬'
 modes[ranting]='🤬'
 modes[recording]='🎬'
+modes[tuned]='📻'
+modes[meditative]='📻🧘'
+modes[writing]='✍️'
 modes[partying]='🎉'
 modes[gaming]='🕹️ '
 
@@ -33,39 +37,43 @@ _basic() {
   local message="$*" buf
   [[ -z "$message" ]] && return 1
   buf="${modes[$CMD]} $message"
-  [[ -n "$(x_muted)" ]] && buf="${buf/\ /\ ${modes[muted]}\ }"
+  #[[ -n "$(x_muted)" ]] && buf="${buf/\ /\ ${modes[muted]}\ }"
   t "$buf" 2>/dev/null
   echo "$CMD" > "$DIR/mode"
 }
 
-x_working() { x_mute; _basic "$@"; }
-x_chatting() { x_unmute; _basic "$@"; }
-x_ranting() { x_unmute; _basic "$@"; }
-x_partying() { x_unmute; _basic "$@"; }
-x_recording() { x_unmute; _basic "$@"; }
-x_gaming() { x_unmute; _basic "$@"; }
-x_focusing() { x_mute; _basic "$@"; }
-x_away() { x_mute; _basic "$@"; }
+x_working() { _basic "$@"; }
+x_chatting() { _basic "$@"; }
+x_ranting() { _basic "$@"; }
+x_partying() { _basic "$@"; }
+x_recording() { _basic "$@"; }
+x_writing() { _basic "$@"; }
+x_tuned() { _basic "tuned to $@"; }
+x_meditative() { _basic "Meditative https://open.spotify.com/playlist/35fMnNReBETCnQ0CH5CHug"; }
+x_random() { _basic "saying and doing random things"; }
+x_gaming() {  _basic "$@"; }
+x_focusing() {  _basic "$@"; }
+x_away() { _basic "$@"; }
 x_muted() {
   [[ -e "$DIR/muted" ]] && echo "${modes[muted]}" && return 0
   return 1
 }
 x_mute() { touch "$DIR/muted"; }
-x_unmute() { [[ -x "$DIR/muted" ]] && rm "$DIR/muted"; }
+x_unmute() { rm "$DIR/muted" &>/dev/null; }
 x_mode() {
   local mode muted live
-  live=$(x_live)
+  #live=$(x_live)
   [[ -e "$DIR/mode" ]] || return 1
   mode="$(<"$DIR/mode")"
   x_muted &>/dev/null && muted=muted
   if [[ $1 = emoji ]]; then
     printf "%s" "${modes[$mode]}"
     [[ -n "$muted" ]] && echo -n " ${modes[$muted]}"
-    echo " ${modes[live]}"
+    #echo " ${modes[live]}"
   else
     printf "%s" "$mode"
     [[ -n "$muted" ]] && echo -n " $muted"
-    [[ -n "$live" ]] && echo " live"
+    #[[ -n "$live" ]] && echo " live"
   fi
 }
 

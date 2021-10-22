@@ -1,4 +1,3 @@
 #!/bin/sh
-what='* working off screen *'
-test -n $1 && what="$what\n$*"
-f "${what}"
+exec bannerfish '* working off screen *'
+

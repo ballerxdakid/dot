@@ -9,9 +9,13 @@ emoji[idea]=💡
 emoji[comment]=💬
 emoji[chat]=💬
 emoji[pomo]=🍅
+emoji[stop]=🛑
 emoji[warning]=⚠️
 emoji[rant]=🤬
 emoji[tv]=📺
+emoji[update]=📰
+emoji[tux]=🐧
+
 
 toemoji() {
   local in=/dev/stdin

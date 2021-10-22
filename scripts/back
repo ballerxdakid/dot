@@ -1,19 +1,8 @@
 #!/bin/bash
-
-clear=$'\033[2J'
-top=$'\033[H'
-
-trap "setterm --cursor on; echo ${clear}; exit; trap -- - SIGINT SIGTERM" SIGTERM SIGINT
-
 what="$*"
-if [ -z "${what}" ]; then
+if [[ -z "${what}" ]]; then
   what="in a bit"
+elif [[ $what =~ ^in\ ([0-9]+) ]]; then
+  what="at $(date -d "${BASH_REMATCH[1]} minutes" +%-I:%M)"
 fi
-
-echo "${clear}"
-while true; do
-  echo "${top}"
-  figl <<<"back $what" | lolcat
-  setterm --cursor off
-  sleep 2
-done
+exec bannerfish "back $what"

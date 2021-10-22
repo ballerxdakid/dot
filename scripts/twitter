@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 USER=rwxrob
-EMAIL=rwx@robs.io
+EMAIL=rob@rwx.gg
 ID=1210114652
 TOKEN=$(auth token twitter)
 CLIENTID=$(auth get id twitter)
