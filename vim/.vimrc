@@ -303,7 +303,7 @@ au bufnewfile,bufRead *ssh/config set filetype=sshconfig
 au bufnewfile,bufRead .dockerignore set filetype=gitignore
 au bufnewfile,bufRead *gitconfig set filetype=gitconfig
 au bufnewfile,bufRead /tmp/psql.edit.* set syntax=sql
-au bufnewfile,bufRead doc.go set spell
+au bufnewfile,bufRead *.go set spell
 
 "fix bork bash detection
 if has("eval")  " vim-tiny detection
