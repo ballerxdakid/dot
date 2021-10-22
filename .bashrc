@@ -39,6 +39,7 @@ export ZETTELCASTS="$VIDEOS/ZettelCasts"
 export CLIP_DIR="$VIDEOS/Clips"
 export CLIP_DATA="$GHREPOS/cmd-clip/data"
 export CLIP_VOLUME=0
+export CLIP_SCREEN=0
 export TERM=xterm-256color
 export HRULEWIDTH=73
 export EDITOR=vi
@@ -49,7 +50,7 @@ export GOPATH="$HOME/.local/share/go"
 export GOBIN="$HOME/.local/bin"
 export GOPROXY=direct
 export CGO_ENABLED=0
-export PYTHONDONTWRITEBYTECODE=1 # fucking shit-for-brains var name
+export PYTHONDONTWRITEBYTECODE=2 # fucking shit-for-brains var name
 export LC_COLLATE=C
 export LESS_TERMCAP_mb="[35m" # magenta
 export LESS_TERMCAP_md="[33m" # yellow
@@ -209,6 +210,7 @@ alias c='printf "\e[H\e[2J"'
 alias clear='printf "\e[H\e[2J"'
 alias coin="clip '(yes|no)'"
 alias grep="grep -P"
+alias minidockenv=". <(minikube docker-env)"
 
 _have vim && alias vi=vim
 
@@ -257,6 +259,7 @@ for i in "${owncomp[@]}"; do complete -C "$i" "$i"; done
 _have gh && . <(gh completion -s bash)
 _have pandoc && . <(pandoc --bash-completion)
 _have kubectl && . <(kubectl completion bash)
+_have clusterctl && . <(clusterctl completion bash)
 _have k && complete -o default -F __start_kubectl k
 _have kind && . <(kind completion bash)
 _have yq && . <(yq shell-completion bash)
@@ -264,6 +267,7 @@ _have helm && . <(helm completion bash)
 _have minikube && . <(minikube completion bash)
 _have mk && complete -o default -F __start_minikube mk
 _have docker && _source_if "$HOME/.local/share/docker/completion" # d
+_have podman && _source_if "$HOME/.local/share/podman/completion" # d
 
 # -------------------- personalized configuration --------------------
 _source_if "$HOME/.bash_personal"
