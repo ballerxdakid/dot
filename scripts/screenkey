@@ -24,7 +24,7 @@
   --font-color "#EBDBB2" \
   --bg-color "#222222" \
   --bak-mode full \
-  --opacity 1 &
+  --opacity 0 &
 
 #--font-color "#d65d0e" \
 #  -g "634x40+670+0" \
