@@ -155,7 +155,7 @@ PROMPT_AT=@
 __ps1() {
   local P='$' dir="${PWD##*/}" B countme short long double\
     r='\[\e[31m\]' g='\[\e[30m\]' h='\[\e[34m\]' \
-    u='\[\e[33m\]' p='\[\e[33m\]' w='\[\e[35m\]' \
+    u='\[\e[33m\]' p='\[\e[34m\]' w='\[\e[35m\]' \
     b='\[\e[36m\]' x='\[\e[0m\]'
 
   [[ $EUID == 0 ]] && P='#' && u=$r && p=$u # root
@@ -244,6 +244,7 @@ new-from() {
 
 new-cmdbox() { new-from rwxrob/template-cmdbox "cmdbox-$1"; }
 new-cmd() { new-from rwxrob/template-bash-command "cmd-$1"; }
+cdz () { cd $(zet get "$@"); }
 
 export -f new-from new-cmdbox new-cmd
 
