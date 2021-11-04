@@ -15,6 +15,7 @@ emoji[rant]=🤬
 emoji[tv]=📺
 emoji[update]=📰
 emoji[tux]=🐧
+emoji[tux]=🐧
 
 
 toemoji() {

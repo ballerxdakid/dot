@@ -61,9 +61,13 @@ elif [[ $topic =~ [wW]itcher ]]; then
 elif [[ $topic =~ [pP]rogramming ]]; then
   export TWITCH_GAMEID=1469308723
   export TWITCH_GAME="Software and Game Development"
+elif [[ $topic =~ [aA]way ]]; then
+  export TWITCH_GAMEID=272263131
+  export TWITCH_GAME="Animals, Aquariums, and Zoos"
 elif [[ $topic =~ 💬 ]]; then
-  export TWITCH_GAMEID=509658
-  export TWITCH_GAME="Just Chatting"
+  :
+  #export TWITCH_GAMEID=509658
+  #export TWITCH_GAME="Just Chatting"
 fi
 twitch title "$topic" 
 chat "$topic"
