@@ -1,0 +1,3 @@
+#!/bin/bash
+title="$(date '+%A, %B %e, %Y')"
+iam chatting "$title"

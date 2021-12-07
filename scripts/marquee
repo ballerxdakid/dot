@@ -26,11 +26,12 @@ marquee() {
   timeremain=$(( $(tput cols) - ${#timebarb} ))
   topicspace=$(( topicremain - ${#mode} - ${#zet}))
   timespace=$(( timeremain - ${#mode} - ${#zet}))
-  if (( $(date +%s)%20 < 10 ));then
-    echo "$mode $topicbarb $(repeat $' ' "$topicspace") rwxrob.tv $zet"
-  else
-    echo "$mode $timebarb $(repeat $' ' "$timespace") rwxrob.tv $zet"
-  fi
+  #if (( $(date +%s)%20 < 10 ));then
+    : #echo "$mode $topicbarb $(repeat $' ' "$topicspace") rwxrob.tv $zet"
+  #else
+    #echo "$mode $timebarb $(repeat $' ' "$timespace") rwxrob.tv $zet"
+    echo "$timebarb $(repeat $' ' "$timespace")   rwxrob.tv $zet"
+  #fi
 }
 
 marquee "$@"

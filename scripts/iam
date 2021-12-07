@@ -11,6 +11,8 @@ modes[muted]='🔇'
 modes[live]='🔴'
 modes[away]='🐟'
 modes[focusing]='☕'
+modes[coding]='⌨️ 🎄 '
+#modes[coding]='⌨️ '
 modes[working]='🏢'
 modes[chatting]='💬'
 modes[random]='💬'
@@ -21,6 +23,8 @@ modes[meditative]='📻🧘'
 modes[writing]='✍️'
 modes[partying]='🎉'
 modes[gaming]='🕹️ '
+modes[answering]='☎️'
+modes[yoga]='🧘'
 
 x_modes() {
   for i in "${!modes[@]}"; do
@@ -45,7 +49,9 @@ _basic() {
 x_working() { _basic "$@"; }
 x_chatting() { _basic "$@"; }
 x_ranting() { _basic "$@"; }
+x_coding() { _basic "$@"; }
 x_partying() { _basic "$@"; }
+x_yoga() { _basic "yoga asana (share your practice, ashtanga, mysore style, quiet)"; }
 x_recording() { _basic "$@"; }
 x_writing() { _basic "$@"; }
 x_tuned() { _basic "tuned to $@"; }

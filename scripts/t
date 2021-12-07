@@ -53,6 +53,9 @@ if [[ $topic =~ [dD]ota ]]; then
   export TWITCH_GAME="Dota 2"
   #export TWITCH_GAMEID=509658
   #export TWITCH_GAME="Just Chatting"
+elif [[ $topic =~ [Tt][Ff]2 ]]; then
+  #export TWITCH_GAMEID=
+  export TWITCH_GAME="Team Fortress 2"
 elif [[ $topic =~ [wW]itcher ]]; then
   export TWITCH_GAMEID=115977
   export TWITCH_GAME="The Witcher 3: Wild Hunt"
@@ -61,13 +64,19 @@ elif [[ $topic =~ [wW]itcher ]]; then
 elif [[ $topic =~ [pP]rogramming ]]; then
   export TWITCH_GAMEID=1469308723
   export TWITCH_GAME="Software and Game Development"
-elif [[ $topic =~ [aA]way ]]; then
-  export TWITCH_GAMEID=272263131
-  export TWITCH_GAME="Animals, Aquariums, and Zoos"
+elif [[ $topic =~ [pP]rogramming ]]; then
+  export TWITCH_GAMEID=1469308723
+  export TWITCH_GAME="Software and Game Development"
+elif [[ $topic =~ ⌨️  ]]; then
+  export TWITCH_GAMEID=1469308723
+  export TWITCH_GAME="Software and Game Development"
 elif [[ $topic =~ 💬 ]]; then
   :
-  #export TWITCH_GAMEID=509658
-  #export TWITCH_GAME="Just Chatting"
+  #export TWITCH_GAMEID=417752
+  #export TWITCH_GAME="Talk Shows & Podcasts"
+  #
+  export TWITCH_GAMEID=509658
+  export TWITCH_GAME="Just Chatting"
 fi
 twitch title "$topic" 
 chat "$topic"

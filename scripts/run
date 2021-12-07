@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+
+[[ -x ./run ]] && exec ./run "$@"
+
 name=$1
 shift
 exec docker run -it --rm --privileged -h "$name" --name "$name" "$name" "$@"
