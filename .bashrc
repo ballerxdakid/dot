@@ -52,6 +52,7 @@ export GOPROXY=direct
 export CGO_ENABLED=0
 export PYTHONDONTWRITEBYTECODE=2 # fucking shit-for-brains var name
 export LC_COLLATE=C
+export CFLAGS="-Wall -Wextra -Werror"
 export LESS_TERMCAP_mb="[35m" # magenta
 export LESS_TERMCAP_md="[33m" # yellow
 export LESS_TERMCAP_me="" # "0m"
@@ -133,6 +134,7 @@ shopt -s expand_aliases
 shopt -s globstar
 shopt -s dotglob
 shopt -s extglob
+
 #shopt -s nullglob # bug kills completion for some
 #set -o noclobber
 
@@ -211,6 +213,7 @@ alias clear='printf "\e[H\e[2J"'
 alias coin="clip '(yes|no)'"
 alias grep="grep -P"
 alias minidockenv=". <(minikube docker-env)"
+alias top=bashtop
 
 _have vim && alias vi=vim
 
@@ -252,7 +255,7 @@ export -f new-from new-cmdbox new-cmd
 
 owncomp=(
   pdf md zet yt gl auth pomo config iam sshkey ws x clip 
-  ./build build b ./setup ./cmd
+  ./build build b ./k8sapp k8sapp ./setup ./cmd run ./run
 )
 
 for i in "${owncomp[@]}"; do complete -C "$i" "$i"; done
@@ -260,15 +263,17 @@ for i in "${owncomp[@]}"; do complete -C "$i" "$i"; done
 _have gh && . <(gh completion -s bash)
 _have pandoc && . <(pandoc --bash-completion)
 _have kubectl && . <(kubectl completion bash)
-_have clusterctl && . <(clusterctl completion bash)
+#_have clusterctl && . <(clusterctl completion bash)
 _have k && complete -o default -F __start_kubectl k
 _have kind && . <(kind completion bash)
 _have yq && . <(yq shell-completion bash)
 _have helm && . <(helm completion bash)
 _have minikube && . <(minikube completion bash)
+_have conftest && . <(conftest completion bash)
 _have mk && complete -o default -F __start_minikube mk
-_have docker && _source_if "$HOME/.local/share/docker/completion" # d
 _have podman && _source_if "$HOME/.local/share/podman/completion" # d
+_have docker && _source_if "$HOME/.local/share/docker/completion" # d
+_have docker-compose && complete -F _docker_compose dc # dc
 
 # -------------------- personalized configuration --------------------
 _source_if "$HOME/.bash_personal"
