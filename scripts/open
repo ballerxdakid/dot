@@ -15,6 +15,10 @@ if (not $_) {
          #    $gh and exec 'firefox', '-new-window', "https://$gh";
          $gh and exec 'google-chrome', "https://$gh";
 }
+if (/\.md$/) {
+    `pandoc -s -o /tmp/index.html $_ 2>/dev/null`;
+    exec 'lynx', '/tmp/index.html';
+}
 -r $_ && exec 'xdg-open', $_;
 m,^http, or  s,^,https://,;
 exec 'google-chrome', $_;
