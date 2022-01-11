@@ -5,4 +5,4 @@ if [ -z "${what}" ]; then
 fi
 cols=$(tput lines)
 pomo stop
-tmux new-window \; split-window \; resize-pane -y $((cols-6)) \; send -t 1 "banner \"$what\"" Enter \; send -t 2 "fishies" Enter
+tmux split-window \; resize-pane -y $((cols-6)) \; send -t 1 "banner \"$what\"" Enter \; send -t 2 "fishies" Enter

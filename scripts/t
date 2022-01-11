@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Updates YouTube and Twitch Titles, sets the GitHub profile status, and
 # sends a tweet pointing to the YouTube video.
 
@@ -80,7 +81,7 @@ elif [[ $topic =~ 💬 ]]; then
 fi
 twitch title "$topic" 
 chat "$topic"
-yt live title "$topic" &>/dev/null
+#yt live title "$topic" &>/dev/null
 # TODO add time stamp to yt live and bonk twitter cache
 twitter update "$topic #livestream #status #update rwxrob.tv" &>/dev/null
 gh status "$topic" &>/dev/null
