@@ -52,7 +52,7 @@ export GOPROXY=direct
 export CGO_ENABLED=0
 export PYTHONDONTWRITEBYTECODE=2 # fucking shit-for-brains var name
 export LC_COLLATE=C
-export CFLAGS="-Wall -Wextra -Werror"
+export CFLAGS="-Wall -Wextra -Werror -O0 -g -fsanitize=address -fno-omit-frame-pointer -finstrument-functions"
 export LESS_TERMCAP_mb="[35m" # magenta
 export LESS_TERMCAP_md="[33m" # yellow
 export LESS_TERMCAP_me="" # "0m"
@@ -214,6 +214,7 @@ alias coin="clip '(yes|no)'"
 alias grep="grep -P"
 alias minidockenv=". <(minikube docker-env)"
 alias top=bashtop
+alias iam=live
 
 _have vim && alias vi=vim
 
@@ -254,7 +255,7 @@ export -f new-from new-cmdbox new-cmd
 # ------------- source external dependencies / completion ------------
 
 owncomp=(
-  pdf md zet yt gl auth pomo config iam sshkey ws x clip 
+  pdf md zet yt gl auth pomo config live sshkey ws x clip 
   ./build build b ./k8sapp k8sapp ./setup ./cmd run ./run
 )
 

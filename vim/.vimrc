@@ -191,6 +191,9 @@ au FileType * hi MatchParen ctermbg=236 ctermfg=darkred
 au FileType markdown,pandoc hi Title ctermfg=yellow ctermbg=NONE
 au FileType markdown,pandoc hi Operator ctermfg=yellow ctermbg=NONE
 au FileType bash set sw=2
+au FileType c set sw=8
+
+set cinoptions+=:0
 
 " Edit/Reload vimr configuration file
 nnoremap confe :e $HOME/.vimrc<CR>

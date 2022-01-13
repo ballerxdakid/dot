@@ -13,8 +13,9 @@ mkdir -p "$HOME/.local/bin" || true
 ln -sf "$PWD/bin/linux/x86_64/tmatrix" "$HOME/.local/bin/tmatrix"
 ln -sf "$PWD/bin/linux/x86_64/clusterctl" "$HOME/.local/bin/clusterctl"
 ln -sf "$PWD/bin/linux/x86_64/minikube" "$HOME/.local/bin/minikube"
+ln -sf "$PWD/bin/linux/x86_64/conftest" "$HOME/.local/bin/conftest"
 
-for i in vim lynx gh git tmux docker podman; do
+for i in vim lynx gh git tmux docker podman iam; do
   cd $i && ./setup
   cd -
 done
