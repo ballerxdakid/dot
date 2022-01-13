@@ -255,7 +255,7 @@ export -f new-from new-cmdbox new-cmd
 # ------------- source external dependencies / completion ------------
 
 owncomp=(
-  pdf md zet yt gl auth pomo config live sshkey ws x clip 
+  pdf md zet yt gl auth pomo config live iam sshkey ws x clip 
   ./build build b ./k8sapp k8sapp ./setup ./cmd run ./run
 )
 
@@ -267,6 +267,7 @@ _have kubectl && . <(kubectl completion bash)
 #_have clusterctl && . <(clusterctl completion bash)
 _have k && complete -o default -F __start_kubectl k
 _have kind && . <(kind completion bash)
+_have kompose && . <(kompose completion bash)
 _have yq && . <(yq shell-completion bash)
 _have helm && . <(helm completion bash)
 _have minikube && . <(minikube completion bash)
