@@ -284,6 +284,9 @@ _source_if "$HOME/.bash_work"
 
 # --- stupid fucking applications that require fucking with bashrc ---
 
+if _have vagrant; then
 # >>>> Vagrant command completion (start)
 . /opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/bash/completion.sh
 # <<<<  Vagrant command completion (end)
+ complete -F _vagrant v
+fi
