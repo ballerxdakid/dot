@@ -252,6 +252,20 @@ cdz () { cd $(zet get "$@"); }
 
 export -f new-from new-cmdbox new-cmd
 
+clonerepo() {
+  local repo="$1"
+  local repo="${repo#https://github.com/}"
+  local user="${repo%%/*}"
+  local name="${repo##*/}"
+  local userd="$REPOS/github.com/$user"
+  local path="$userd/$name"
+  [[ -d "$path" ]] && cd "$path" && return
+  mkdir -p "$userd"
+  cd "$userd"
+  gh repo clone "$user/$name"
+  cd "$name"
+} && export -f clonerepo
+
 # ------------- source external dependencies / completion ------------
 
 owncomp=(
