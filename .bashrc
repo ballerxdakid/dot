@@ -281,3 +281,9 @@ _have docker-compose && complete -F _docker_compose dc # dc
 _source_if "$HOME/.bash_personal"
 _source_if "$HOME/.bash_private"
 _source_if "$HOME/.bash_work"
+
+# --- stupid fucking applications that require fucking with bashrc ---
+
+# >>>> Vagrant command completion (start)
+. /opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/bash/completion.sh
+# <<<<  Vagrant command completion (end)
