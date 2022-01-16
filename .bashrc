@@ -295,3 +295,6 @@ _have docker-compose && complete -F _docker_compose dc # dc
 _source_if "$HOME/.bash_personal"
 _source_if "$HOME/.bash_private"
 _source_if "$HOME/.bash_work"
+
+complete -C /usr/bin/terraform terraform
+complete -C /usr/bin/terraform tf
