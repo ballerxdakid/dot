@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+dir=$(mktemp -d)
+curl -sSLO "https://api.github.com/repos/ratwithacompiler/OBS-captions-plugin/releases/latest" --output-dir "$dir"
+name=$(jq -r .name "$dir/latest")
+url=$(jq -r '.assets[].browser_download_url' "$dir/latest" | grep Linux)
+echo "Attempting to download $name from $url"
+curl -LO --output-dir "$dir" "$url"
+cd "$dir"
+unzip *.zip
+mv *Linux/libobs_google_caption_plugin "$HOME/.config/obs-studio/plugins"
+rm -rf "$dir" 
