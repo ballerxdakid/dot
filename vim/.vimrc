@@ -212,8 +212,12 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'rwxrob/vim-pandoc-syntax-simple'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'tpope/vim-fugitive'
+  Plug 'hashivim/vim-terraform'
   Plug 'morhetz/gruvbox'
   call plug#end()
+
+  " terraform
+  let g:terraform_fmt_on_save = 1
 
   " pandoc
   let g:pandoc#formatting#mode = 'h' " A'
