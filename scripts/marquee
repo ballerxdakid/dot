@@ -12,7 +12,7 @@ marquee() {
   local -i topicremain timeremain timew topicw
   local -a timebar topicbar
   #topic="$(topic)" topic="${topic#* }"
-  topic="$(live title)"
+  topic="$(head -1 ~/.currently)"
   #pomo="$(pomo)" pomo=${pomo%%m*} pomo=${pomo%%s*} 
   #mode="$(iam mode emoji)"
   zet="zet:$(zet current)"
