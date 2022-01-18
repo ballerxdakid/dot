@@ -299,3 +299,23 @@ _source_if "$HOME/.bash_work"
 
 complete -C /usr/bin/terraform terraform
 complete -C /usr/bin/terraform tf
+
+vagrant(){
+  docker run -it --rm \
+    -e LIBVIRT_DEFAULT_URI \
+    -v /var/run/libvirt/:/var/run/libvirt/ \
+    -v ~/.vagrant.d:/.vagrant.d \
+    -v $(realpath "${PWD}"):${PWD} \
+    -w $(realpath "${PWD}") \
+    --network host \
+    vagrantlibvirt/vagrant-libvirt:latest \
+      vagrant $@
+} && export -f vagrant
+
+if _have vagrant; then
+  #export VAGRANT_DEFAULT_PROVIDER=libvirt
+# >>>> Vagrant command completion (start)
+. /opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/bash/completion.sh
+# <<<<  Vagrant command completion (end)
+ complete -F _vagrant v
+fi
