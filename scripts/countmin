@@ -9,4 +9,4 @@ while IFS= read -r line; do
   fi
 done
 echo
-echo "TOTAL MINUTES: $min + 15 for break"
+echo "TOTAL MINUTES: $min"
