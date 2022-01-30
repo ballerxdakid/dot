@@ -113,6 +113,7 @@ pathprepend \
 
 pathappend \
   /usr/local/opt/coreutils/libexec/gnubin \
+  /mnt/c/Program\ Files/Oracle/VirtualBox \
   /mingw64/bin \
   /usr/local/bin \
   /usr/local/sbin \
