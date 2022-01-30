@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# be sure to install the ca-certificates package
+
 # see ../lynx/README.md for configs
 
 lynxpath=/usr/bin/lynx
