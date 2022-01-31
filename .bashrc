@@ -268,7 +268,7 @@ clone() {
   [[ -d "$path" ]] && cd "$path" && return
   mkdir -p "$userd"
   cd "$userd"
-  gh repo clone "$user/$name" -- --recurse-submodules
+  gh repo clone "$user/$name" -- --recurse-submodule
   cd "$name"
 } && export -f clone
 
