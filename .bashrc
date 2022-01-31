@@ -64,6 +64,10 @@ export ANSIBLE_INVENTORY="$HOME/.config/ansible/ansible_hosts"
 
 [[ -d /.vim/spell ]] && export VIMSPELL=("$HOME/.vim/spell/*.add")
 
+# -------------------------------- gpg -------------------------------
+
+#export GPG_TTY=$(tty)
+
 # ------------------------------- pager ------------------------------
 
 if [[ -x /usr/bin/lesspipe ]]; then
@@ -254,7 +258,7 @@ cdz () { cd $(zet get "$@"); }
 
 export -f new-from new-cmdbox new-cmd
 
-clonerepo() {
+clone() {
   local repo="$1"
   local repo="${repo#https://github.com/}"
   local user="${repo%%/*}"
@@ -264,9 +268,9 @@ clonerepo() {
   [[ -d "$path" ]] && cd "$path" && return
   mkdir -p "$userd"
   cd "$userd"
-  gh repo clone "$user/$name"
+  gh repo clone "$user/$name" -- --recurse-submodules
   cd "$name"
-} && export -f clonerepo
+} && export -f clone
 
 # ------------- source external dependencies / completion ------------
 
@@ -279,7 +283,8 @@ for i in "${owncomp[@]}"; do complete -C "$i" "$i"; done
 
 _have gh && . <(gh completion -s bash)
 _have pandoc && . <(pandoc --bash-completion)
-_have kubectl && . <(kubectl completion bash)
+_have kubectl && . <(kubectl completion bash 2>/dev/null)
+_have spotify && . <(spotify completion bash 2>/dev/null)
 #_have clusterctl && . <(clusterctl completion bash)
 _have k && complete -o default -F __start_kubectl k
 _have kind && . <(kind completion bash)
@@ -321,3 +326,5 @@ export VAGRANT_EXPERIMENTAL="disks"
 # <<<<  Vagrant command completion (end)
  complete -F _vagrant v
 fi
+export DISPLAY=:0.0  #GWSL
+export PULSE_SERVER=tcp:localhost #GWSL
