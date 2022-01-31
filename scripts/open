@@ -21,5 +21,6 @@ if (/\.md$/) {
 }
 -r $_ && exec 'xdg-open', $_;
 m,^http, or  s,^,https://,;
+-x '/mnt/c/Windows/explorer.exe' and exec 'explorer.exe', $_;
 exec 'google-chrome', $_;
 
