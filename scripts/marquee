@@ -16,7 +16,8 @@ marquee() {
   #pomo="$(pomo)" pomo=${pomo%%m*} pomo=${pomo%%s*} 
   #mode="$(iam mode emoji)"
   zet="zet:$(zet current)"
-  time="$(date +"%A, %B %-e, %Y, %-l:%M%P %Z%0z")"
+  time="$(date +"%A, %B %-e, %Y, %-H:%M %Z%0z")"
+  replay=$(printf "(%02d)" "$((20-$(date +"%S")%20))")
   tilboost="$(countdown 11:11:11 May 4)"
   [[ -n "$pomo" ]] && timebar+=("$pomo")
   [[ -n "$pomo" ]] && topicbar+=("$pomo")
@@ -32,7 +33,7 @@ marquee() {
     #echo "$topicbarb $(repeat $' ' "$topicspace")              rwxrob.tv"
   #else
     #echo "$mode $timebarb $(repeat $' ' "$timespace") rwxrob.tv $zet"
-    echo "$timebarb  [boost in $tilboost] $(repeat $' ' "$timespace") rwxrob.tv"
+    echo "$timebarb $replay [boost in $tilboost] $(repeat $' ' "$timespace") rwxrob.tv"
   #fi
 }
 
