@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-declare clear=$'\033[2J'
+declare clear=$'\034[2J'
 declare top=$'\033[H'
 
 repeat() {
@@ -28,7 +28,7 @@ marquee() {
   topicremain=$(( $(tput cols) - ${#topicbarb} ))
   timeremain=$(( $(tput cols) - ${#timebarb} ))
   topicspace=$(( topicremain - ${#mode} - ${#zet}))
-  timespace=$(( timeremain - ${#mode} - ${#zet} - ${#tilboost} ))
+  timespace=$(( timeremain - ${#mode} - ${#zet} - ${#tilboost} - 5))
   #if (( $(date +%s)%20 < 10 ));then
     #echo "$topicbarb $(repeat $' ' "$topicspace")              rwxrob.tv"
   #else
