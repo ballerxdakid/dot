@@ -6,6 +6,12 @@ case $- in
 *) return ;; 
 esac
 
+# ------------------------- distro detection -------------------------
+
+export DISTRO
+[[ $(uname -r) =~ Microsoft ]] && DISTRO=WSL2 #TODO distinguish WSL1
+#TODO add the rest
+
 # ---------------------- local utility functions ---------------------
 
 _have()      { type "$1" &>/dev/null; }
@@ -117,7 +123,9 @@ pathprepend \
 
 pathappend \
   /usr/local/opt/coreutils/libexec/gnubin \
-  /mnt/c/Program\ Files/Oracle/VirtualBox \
+  '/mnt/c/Program Files/Oracle/VirtualBox' \
+  '/mnt/c/Windows' \
+  '/mnt/c/Program Files (x86)/VMware/VMware Workstation' \
   /mingw64/bin \
   /usr/local/bin \
   /usr/local/sbin \
