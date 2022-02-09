@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 all=$(sudo docker ps -aq)
 if [[ -z $all ]];then

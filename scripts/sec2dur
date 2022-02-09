@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 seconds="$1"
 [[ -z "$seconds" ]] && echo "usage: $0 SECONDS" && exit 1
 days=$((seconds/86400))

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 clear=$'\033[2J'
 top=$'\033[H'

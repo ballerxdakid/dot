@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 declare target="$1"
 declare red=$'\033[38;2;255;0;0m'

@@ -1,3 +1,0 @@
-#!/bin/bash
-[[ $DISTRO == WSL2 ]] && exec vmrun.exe "$@"
-exec vmrun

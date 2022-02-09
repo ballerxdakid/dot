@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # WARNING: This script assumes you are using GitLab for everything and
 # only work on the master branch.

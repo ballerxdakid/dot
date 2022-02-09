@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Set the figlet default font, font directory, and centering as well as
 # defaults to passing it to lolcat for coloring.

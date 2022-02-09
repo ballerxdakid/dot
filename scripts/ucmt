@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Seriously, why do people fuck around with other editor-specific ways
 # of commenting things. You don't need no fucking "visual" mode. Vi

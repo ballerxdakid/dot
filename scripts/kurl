@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # let's ping to make sure the VPN is up and the IP/host is good
 

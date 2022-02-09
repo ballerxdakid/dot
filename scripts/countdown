@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 time="$*"
 [[ -z "$time" ]] && echo "usage: $0 TIME (see date -d)" && exit 1

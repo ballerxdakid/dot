@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # 💤 **Break** - out < 30 minutes, *no chat*
 while IFS= read -r line; do
   mode=${line%%-*}

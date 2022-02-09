@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Outputs the seconds since the thing identified by the first argument
 # was last modified (not created).

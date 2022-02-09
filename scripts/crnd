@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 red=$[RANDOM%255]
 green=$[RANDOM%255]
 blue=$[RANDOM%255]

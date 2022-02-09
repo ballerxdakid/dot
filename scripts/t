@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 
 # Updates YouTube and Twitch Titles, sets the GitHub profile status, and

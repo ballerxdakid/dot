@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export black=$'\e[30m'
 export red=$'\e[31m'

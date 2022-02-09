@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 exec youtube-dl \
   --ignore-errors --output "%(title)s.%(ext)s" \
   --extract-audio --audio-format mp3 "$@"

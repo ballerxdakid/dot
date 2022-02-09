@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # note, unicode is passed as is (as it should be, imho)
 # and forward slashes are not unnecessarily escaped

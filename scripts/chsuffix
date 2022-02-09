@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Changes the suffixes from the first argument to the second argument for
 # all files specified after that as arguments. Use globstar expansion to

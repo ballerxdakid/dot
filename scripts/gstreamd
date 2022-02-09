@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Starts up an nginx server in a docker container on localhost enabling
 # dual-streaming to YouTube and Twitch at the same time. Requires the

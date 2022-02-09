@@ -1,9 +1,9 @@
 # Scripts
 
-Pilfer at your own peril. You'll find mostly just bash and perl. If
-that's not your thing, don’t waste your time — especially if you use
-`zsh-it` for anything. If you have questions, come ask me on
-<https://rwxrob.tv>.
+Pilfer at your own peril. You'll find a bit of everything, but mostly
+just bash and perl. If that's not your thing, don’t waste your time —
+especially if you use `zsh-it` for anything. If you have questions, come
+ask me on <https://rwxrob.tv>.
 
 More substantial commands have their own repos prefixed with [`cmd-`]
 derived [`template-bash-command`]. Other commands (like the popular
@@ -17,13 +17,14 @@ derived [`template-bash-command`]. Other commands (like the popular
 
 ## Installation
 
-Best way to use these is to grab them and put them into your own stuff.
-If the shebang lines don't work it means you are using a shitty operating
-system (not my problem, fuck off) or you want to use them on something
-besides Linux (again, fuck off). If you are one of the very few wanting
-to put something on Alpine (the god of all container OS distros) then
-you probably won't even read this and already will have fixed the other
-stuff to your liking.
+> ⚠️
+> If you don't understand what any script is doing and how, then don't
+> install it, period. You have been warned.
+
+Best way to use these scripts is to *read them*, grab them and put them
+into your own stuff. ***For personal scripts only***, I've given in and
+started using the incredibly inefficient and insecure `/usr/bin/env`
+she-bang line convention, which pretty much ensures they will work on most any OS and distro.
 
 ## Legal
 

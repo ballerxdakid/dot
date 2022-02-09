@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Locates the executable passed as the first argument and detects if it
 # is a text file and in a git repository and if so passes the URL to the

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 url="https://www.youtube.com/c/rwxrob/search?query=$(urlencode $*)"
 

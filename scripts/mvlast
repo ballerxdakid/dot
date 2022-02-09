@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 readonly CHA=$'\033[38;2;128;255;0m'
 readonly RED=$'\033[38;2;255;0;0m'
