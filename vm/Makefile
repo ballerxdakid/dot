@@ -6,7 +6,7 @@ dot.vmx: dot.vmx.src
 	cp $? $@
 
 dot.vmdk: 
-	curl -L $(vmdk) -o dot.vmdk
+	curl -L "$(vmdk)" -o dot.vmdk
 
 cloudinit.iso: meta-data network-config user-data
 	mkisofs -output cloudinit.iso -volid cidata -joliet -rock meta-data user-data network-config
